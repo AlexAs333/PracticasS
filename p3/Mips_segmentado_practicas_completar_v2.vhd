@@ -282,10 +282,10 @@ COMPONENT Banco_MEM is
 	signal reset_ID, reset_MEM, load_ID, load_EX, load_Mem : std_logic;
 	signal undef : std_logic;
 --se�ales de control de los muxes 4 a 1 que hemos a�adido para el jal y el ret(en el mips original eran 2 a 1)
-		signal ctrl_Mux4a1_escritura_BR, PCSrc: std_logic_vector (2 downto 0);
+		signal ctrl_Mux4a1_escritura_BR, PCSrc: std_logic_vector (1 downto 0);
 -- Instrucciones jal y ret
 	signal jal_ID, ret_ID, jal_MEM_ID, jal_EX_MEM, jal_WB_EX : std_logic; --si necesit�is propagar las se�ales a otras etapas, definid las se�ales necesarias. Nuevas señales que permiten la propagación de PC4 Ejemplo: jal_EX, jal_MEM...
-	signal jal_MEM, jal_EX, jal_WB : std_logic_vector(31 down to 0) --guardan pc4 en los siguientes bancos de regs
+	signal jal_MEM, jal_EX, jal_WB : std_logic_vector (31 downto 0); --guardan pc4 en los siguientes bancos de regs
 -- Bit validez etapas. Permiten inhabilitar instrucciones. No se hace en la pr�ctica 3, pero s� en los proyecto
 	signal valid_I_IF, valid_I_ID, valid_I_EX_in, valid_I_EX, valid_I_MEM, valid_I_WB_in, valid_I_WB: std_logic;
 -- contadores
@@ -311,7 +311,7 @@ begin
 	------------------------------------------------------------------------------------
 	-- mux de entrada al PC (PC+4 o direccion de salto si se detecta salto tomado en D)
 	-- Tiene dos entradas que no se usan. Se pueden utilizar para dar soporte a nuevas intrucciones
-	muxPC: mux4_1 port map (Din0 => PC4, DIn1 => Dirsalto_ID, Din2 => BusA, DIn3 => x"00000000", ctrl => PCSrc, Dout => PC_in);							
+	muxPC: mux4_1 port map (Din0 => PC4, DIn1 => Dirsalto_ID, Din2 => busA, DIn3 => x"00000000", ctrl => PCSrc, Dout => PC_in);	
 	------------------------------------------------------------------------------------
 	Mem_I: memoriaRAM_I PORT MAP (CLK => CLK, ADDR => PC_out, Din => x"00000000", WE => '0', RE => '1', Dout => IR_in);
 	------------------------------------------------------------------------------------
@@ -448,7 +448,7 @@ begin
 	------------------------------------------Etapa WB-------------------------------------------------------------------						
 	--	Mux 4 a 1. Inicialmente s�lo se usan dos entradas, y las otras dos est�n desconectadas, pero se pueden usar para las nuevas instrucciones	
 	--  Para ello hay que realizar las conexiones necesarias, y ajustar la se�al de control del multiplexor			
-	ctrl_Mux4a1_escritura_BR <= '0'&MemtoReg_WB	;
+	ctrl_Mux4a1_escritura_BR <= jal_WB_EX&MemtoReg_WB	;
 	mux_busW: mux4_1 port map (Din0 => ALU_out_WB, DIn1 => MDR, DIn2 => jal_WB, DIn3 => x"00000000", ctrl => ctrl_Mux4a1_escritura_BR, Dout => busW);
 	
 --------------------------------------------------------------------------------------------------

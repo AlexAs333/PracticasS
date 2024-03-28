@@ -6,7 +6,10 @@
 @8: 2
 
 
-jal r0, 17
+jal r0, 3
+nop
+beq r1,r1,-1
+nop
 lw r1, 3(r7)
 lw r2, 4(r7)
 lw r3, 5(r7)

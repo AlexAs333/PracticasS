@@ -1,0 +1,58 @@
+v 4
+file "/mnt/c/Users/alexa/Desktop/PracticasS/p3/" "mux4_1.vhd" "77e61d225e8903760cce4b3e7e6390eff88901d5" "20240328091126.501":
+  entity mux4_1 at 20( 493) + 0 on 327;
+  architecture behavioral of mux4_1 at 41( 1197) + 0 on 328;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/p3/" "mux2_1.vhd" "16c03f03addbb8a3f3dad9a1da21f497d0aa4854" "20240328091126.337":
+  entity mux2_1 at 20( 493) + 0 on 323;
+  architecture behavioral of mux2_1 at 39( 1069) + 0 on 324;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/p3/" "bits_shifter.vhd" "84314704fb90b0c3a56bacef575e87f50f736186" "20240328091126.113":
+  entity two_bits_shifter at 20( 491) + 0 on 319;
+  architecture behavioral of two_bits_shifter at 37( 1003) + 0 on 320;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/p3/" "UC_completar.vhd" "d866e5ed99fb1a34b743fd9889f0f61e7b7393fc" "20240328091125.892":
+  entity uc at 20( 481) + 0 on 315;
+  architecture behavioral of uc at 50( 1658) + 0 on 316;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/p3/" "RAM-I_ejemplo_sin_nops_planificar.vhd" "873c6925d04481ae1f474eefa7737b741b353c87" "20240328091125.700":
+  entity memoriaram_i at 20( 491) + 0 on 311;
+  architecture behavioral of memoriaram_i at 41( 1237) + 0 on 312;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/p3/" "Mips_segmentado_practicas_completar_v2.vhd" "ca17b5f0a0ad3b37ce8239bf0bd4f9c9c791038e" "20240328091125.250":
+  entity mips_segmentado at 15( 620) + 0 on 307;
+  architecture behavioral of mips_segmentado at 24( 802) + 0 on 308;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/p3/" "Banco_WB.vhd" "2136940b04824280f30c8dca2f69463a53bcdd54" "20240328091125.014":
+  entity banco_wb at 20( 487) + 0 on 303;
+  architecture behavioral of banco_wb at 63( 2310) + 0 on 304;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/p3/" "Banco_ID.vhd" "f481ce89d197a8f5759552cae9957568849d49c8" "20240328091124.832":
+  entity banco_id at 4( 288) + 0 on 299;
+  architecture behavioral of banco_id at 21( 850) + 0 on 300;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/p3/" "BReg.vhd" "bb69d410cca56dd4f196ac706a7044ffa4091399" "20240328091124.626":
+  entity breg at 20( 481) + 0 on 295;
+  architecture behavioral of breg at 49( 1525) + 0 on 296;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/p3/" "ALU.vhd" "36885e9b9fb1d4260cef66f02b1eb0f5c1fecac1" "20240328091124.480":
+  entity alu at 20( 482) + 0 on 293;
+  architecture behavioral of alu at 40( 1278) + 0 on 294;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/p3/" "Banco_EX.vhd" "ef39f933260e0906d3becf4a11bbbae23e52d927" "20240328091124.726":
+  entity banco_ex at 20( 487) + 0 on 297;
+  architecture behavioral of banco_ex at 78( 2935) + 0 on 298;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/p3/" "Banco_MEM.vhd" "a63143eb624bf9299177ce9d088d5b166d2aafc9" "20240328091124.907":
+  entity banco_mem at 20( 488) + 0 on 301;
+  architecture behavioral of banco_mem at 68( 2356) + 0 on 302;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/p3/" "Ext_signo.vhd" "a86099b57bba8e351753e752f26601c7908ad4f4" "20240328091125.132":
+  entity ext_signo at 20( 488) + 0 on 305;
+  architecture behavioral of ext_signo at 37( 989) + 0 on 306;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/p3/" "RAM-D_ejemplo.vhd" "ab3244ac26b2d294f764ce97108b62b0608808f6" "20240328091125.588":
+  entity data_memory_subsystem at 20( 489) + 0 on 309;
+  architecture behavioral of data_memory_subsystem at 46( 1509) + 0 on 310;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/p3/" "REGISTER.vhd" "bb1f16639744f39ecc1ef4892185e16345358757" "20240328091125.806":
+  entity reg at 2( 2) + 0 on 313;
+  architecture behavioral of reg at 15( 421) + 0 on 314;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/p3/" "adder32.vhd" "314628325a7fba8ded83ce676b48051d32b99dc4" "20240328091125.999":
+  entity adder32 at 20( 486) + 0 on 317;
+  architecture behavioral of adder32 at 39( 1097) + 0 on 318;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/p3/" "counter.vhd" "4c787804472fe6172d2d20f4bfdcfb0934d580c9" "20240328091126.245":
+  entity counter at 20( 487) + 0 on 321;
+  architecture behavioral of counter at 46( 1270) + 0 on 322;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/p3/" "mux2_5bits.vhd" "380d4d9ec33f6a77c2e56b7f36dec5b19b69ff9d" "20240328091126.413":
+  entity mux2_5bits at 20( 489) + 0 on 325;
+  architecture behavioral of mux2_5bits at 39( 1068) + 0 on 326;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/p3/" "testbench_Mips.vhd" "f0749b154014cb62bc0254290a090bcfd8cbadac" "20240328091126.594":
+  entity testbench at 3( 26) + 2 on 329;
+  architecture behavior of testbench at 10( 149) + 2 on 330;
