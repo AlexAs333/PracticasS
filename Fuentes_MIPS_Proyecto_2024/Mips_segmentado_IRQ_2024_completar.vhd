@@ -379,7 +379,7 @@ END COMPONENT;
 	-- COMPLETAR:
 	--nuevas se�ales para transmitir informaci�n para la instruci�n jal y ret
 	--si necesit�is propagar las se�ales a otras etapas, definid las se�ales necesarias. Ejemplo: jal_EX, jal_MEM...
-	signal jal_MEM_ID, jal_EX_ID, jal_WB_ID : std_logic;
+	signal jal_MEM_ID, jal_EX_MEM, jal_WB_EX : std_logic;
 	signal PC4_EX, PC4_MEM : std_logic_vector(31 downto 0);
 	signal jal_ID, jal_EX, jal_MEM, jal_WB, ret_ID : std_logic; 	
 	
@@ -537,8 +537,8 @@ begin
 						Reg_Rt_ID => IR_ID(20 downto 16), Reg_Rd_ID => IR_ID(15 downto 11), Reg_Rt_EX => Reg_Rt_EX, Reg_Rd_EX => Reg_Rd_EX, 
 						valid_I_EX_in => valid_I_EX_in, valid_I_EX => valid_I_EX,
 						-- Puertos de extensi�n. Inicialmente est�n desconectados
-						ext_word_1_ID => PC4_ID, ext_word_2_ID => x"00000000", ext_signal_1_ID => '0', ext_signal_2_ID => '0',
-						ext_word_1_EX => jal_MEM, ext_word_2_EX => open, ext_signal_1_EX => open, ext_signal_2_EX => open
+						ext_word_1_ID => PC4_ID, ext_word_2_ID => x"00000000", ext_signal_1_ID => jal_ID, ext_signal_2_ID => '0',
+						ext_word_1_EX => jal_MEM, ext_word_2_EX => open, ext_signal_1_EX => jal_MEM_ID, ext_signal_2_EX => open
 						);  		
 	
 	------------------------------------------Etapa EX-------------------------------------------------------------------
@@ -583,8 +583,8 @@ begin
 										--Nuevo: para llevar el PC a la etapa MEM	
 										PC_exception_EX => PC_exception_EX, PC_exception_MEM => PC_exception_MEM, 
 										-- Puertos de extensi�n. Inicialmente est�n desconectados
-										ext_word_1_EX => jal_MEM, ext_word_2_EX => x"00000000", ext_signal_1_EX => '0', ext_signal_2_EX => '0',
-										ext_word_1_MEM => jalEX, ext_word_2_MEM => open, ext_signal_1_MEM => open, ext_signal_2_MEM => open
+										ext_word_1_EX => jal_MEM, ext_word_2_EX => x"00000000", ext_signal_1_EX => jal_MEM_ID, ext_signal_2_EX => '0',
+										ext_word_1_MEM => jal_EX, ext_word_2_MEM => open, ext_signal_1_MEM => jal_EX_MEM, ext_signal_2_MEM => open
 										);
 	
 	--
@@ -617,8 +617,8 @@ begin
 										RW_MEM => RW_MEM, RW_WB => RW_WB,
 										valid_I_WB_in => valid_I_MEM, valid_I_WB => valid_I_WB,
 										-- Puertos de extensi�n. Inicialmente est�n desconectados
-										ext_word_1_MEM => x"00000000", ext_word_2_MEM => x"00000000", ext_signal_1_MEM => '0', ext_signal_2_MEM => '0',
-										ext_word_1_WB => open, ext_word_2_WB => open, ext_signal_1_WB => open, ext_signal_2_WB => open
+										ext_word_1_MEM => jal_EX, ext_word_2_MEM => x"00000000", ext_signal_1_MEM => jal_EX_MEM, ext_signal_2_MEM => '0',
+										ext_word_1_WB => jal_WB, ext_word_2_WB => open, ext_signal_1_WB => jal_WB_EX, ext_signal_2_WB => open
 										);
 	
 	--

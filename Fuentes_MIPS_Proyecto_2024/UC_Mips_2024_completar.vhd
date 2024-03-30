@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------------------
--- Description: Unidad de Control. Las señales de las nuevas instrucciones no están completas
+-- Description: Unidad de Control. Las seï¿½ales de las nuevas instrucciones no estï¿½n completas
 ----------------------------------------------------------------------------------
 
 
@@ -16,7 +16,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity UC is
-    Port ( valid_I_ID : in  STD_LOGIC; --indica si es una instrucción válida
+    Port ( valid_I_ID : in  STD_LOGIC; --indica si es una instrucciï¿½n vï¿½lida
     	   IR_op_code : in  STD_LOGIC_VECTOR (5 downto 0);
            Branch : out  STD_LOGIC;
            RegDst : out  STD_LOGIC;
@@ -25,18 +25,18 @@ entity UC is
            MemRead : out  STD_LOGIC;
            MemtoReg : out  STD_LOGIC;
            RegWrite : out  STD_LOGIC;
-           -- Señales Práctica 3
-		   jal : out  STD_LOGIC; --indica que es una instrucción jal 
-           ret : out  STD_LOGIC; --indica que es una instrucción ret
-		   undef: out STD_LOGIC; --indica que el código de operación no pertenence a una instrucción conocida. En este procesador se usa sólo para depurar
-           -- Nuevas señales
-		   RTE	: out  STD_LOGIC -- indica que es una instrucción RTE	   
-		   -- Fin Nuevas señales
+           -- Seï¿½ales Prï¿½ctica 3
+		   jal : out  STD_LOGIC; --indica que es una instrucciï¿½n jal 
+           ret : out  STD_LOGIC; --indica que es una instrucciï¿½n ret
+		   undef: out STD_LOGIC; --indica que el cï¿½digo de operaciï¿½n no pertenence a una instrucciï¿½n conocida. En este procesador se usa sï¿½lo para depurar
+           -- Nuevas seï¿½ales
+		   RTE	: out  STD_LOGIC -- indica que es una instrucciï¿½n RTE	   
+		   -- Fin Nuevas seï¿½ales
 		   );
 end UC;
 
 architecture Behavioral of UC is
--- Constantes para mejorar la legibilidad del código
+-- Constantes para mejorar la legibilidad del cï¿½digo
 CONSTANT NOP_opcode : STD_LOGIC_VECTOR (5 downto 0) := "000000";
 CONSTANT ARIT_opcode : STD_LOGIC_VECTOR (5 downto 0) := "000001";
 CONSTANT LW_opcode : STD_LOGIC_VECTOR (5 downto 0) := "000010";
@@ -46,14 +46,14 @@ CONSTANT JAL_opcode : STD_LOGIC_VECTOR (5 downto 0) := "000101";
 CONSTANT RET_opcode : STD_LOGIC_VECTOR (5 downto 0) := "000110";
 CONSTANT RTE_opcode : STD_LOGIC_VECTOR (5 downto 0) := "001000";
 begin
--- Si IR_op = 0 es nop, IR_op=1 es aritmética, IR_op=2 es LW, IR_op=3 es SW, IR_op= 4 es BEQ, IR_op=5 es jal, IR_op= 6 es ret, IR_op= 8 es RTE
+-- Si IR_op = 0 es nop, IR_op=1 es aritmï¿½tica, IR_op=2 es LW, IR_op=3 es SW, IR_op= 4 es BEQ, IR_op=5 es jal, IR_op= 6 es ret, IR_op= 8 es RTE
 
 UC_mux : process (IR_op_code, valid_I_ID)
 begin 
-	-- Por defecto ponemos todas las señales a 0 que es el valor que garantiza que no alteramos nada
+	-- Por defecto ponemos todas las seï¿½ales a 0 que es el valor que garantiza que no alteramos nada
 	Branch <= '0'; RegDst <= '0'; ALUSrc <= '0'; MemWrite <= '0'; MemRead <= '0'; MemtoReg <= '0'; RegWrite <= '0'; UNDEF <= '0';
 	jal <= '0'; ret <= '0'; RTE <= '0'; 
-	IF valid_I_ID = '1' then --si la instrucción es válida analizamos su código de operación
+	IF valid_I_ID = '1' then --si la instrucciï¿½n es vï¿½lida analizamos su cï¿½digo de operaciï¿½n
 		CASE IR_op_code IS
 			--NOP 
 			WHEN  NOP_opcode  	=>  
@@ -69,13 +69,13 @@ begin
 			-- COMPLETAR
 			------------------------------------------------
 			-- JAL
-			WHEN  jal_opcode  	=>  jal <= '1'; --¿qué más señales?
+			WHEN  jal_opcode  	=>  jal <= '1'; RegWrite <= '1'; --ï¿½quï¿½ mï¿½s seï¿½ales?
 			-- RET
-			WHEN  RET_opcode  	=>  ret <= '1'; --¿qué más señales?
+			WHEN  RET_opcode  	=>  ret <= '1'; --ï¿½quï¿½ mï¿½s seï¿½ales?
 			--RTE
-			WHEN  RTE_opcode  	=>  RTE <= '1'; --¿qué más señales?
+			WHEN  RTE_opcode  	=>  RTE <= '1'; --ï¿½quï¿½ mï¿½s seï¿½ales?
 			-- OP code undefined
-			WHEN  OTHERS 	  	=> UNDEF <= '1'; --Se activa si la instrucción no pertenece al repertorio
+			WHEN  OTHERS 	  	=> UNDEF <= '1'; --Se activa si la instrucciï¿½n no pertenece al repertorio
 		  END CASE;
 	END IF;
 end process;
