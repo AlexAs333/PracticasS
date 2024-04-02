@@ -398,7 +398,6 @@ begin
 	-- Interacci�n con las excepciones:
 	-- Si el procesador entero est� parado no procesamos la excepci�n
 	-- Si estamos parados en ID, s� que la procesamos (nos da igual la instrucci�n en ID, la vamos a matar)
-
 	load_PC <= '1'; 
 	-- Fin completar;
 	------------------------------------------------------------------------------------
@@ -437,7 +436,7 @@ begin
 	-- NUEVO: en pr�cticas no se paraba nunca.
 	-- Parar_ID detiene la etapa ID y �tambi�n debe parar la anterior! Eso �ltimo lo deb�is hacer vosotros.
 	-- Completar: tambi�n hay que parar cuando se active parar_MIPS
-	load_ID <= not(parar_ID); 
+	load_ID <= not(parar_ID) or not(parar_MIPS); 
 
 	Banco_IF_ID: Banco_ID port map (	IR_in => IR_in, PC4_in => PC4, clk => clk, reset => reset_ID, load => load_ID, IR_ID => IR_ID, PC4_ID => PC4_ID, 
 										--Nuevo
