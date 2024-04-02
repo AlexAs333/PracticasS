@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------------------
--- Description: Unidad de detención incompleta. Ahora mismo no para nunca, ni mata ninguna instrucción en la etapa Fetch.
+-- Description: Unidad de detenciï¿½n incompleta. Ahora mismo no para nunca, ni mata ninguna instrucciï¿½n en la etapa Fetch.
 ----------------------------------------------------------------------------------
 
 
@@ -8,9 +8,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 --Mux 4 a 1
 entity UD is
     Port ( 	
-			valid_I_ID : in  STD_LOGIC; --indica si es una instrucción de ID es válida
-			valid_I_EX : in  STD_LOGIC; --indica si es una instrucción de EX es válida
-			valid_I_MEM : in  STD_LOGIC; --indica si es una instrucción de MEM es válida
+			valid_I_ID : in  STD_LOGIC; --indica si es una instrucciï¿½n de ID es vï¿½lida
+			valid_I_EX : in  STD_LOGIC; --indica si es una instrucciï¿½n de EX es vï¿½lida
+			valid_I_MEM : in  STD_LOGIC; --indica si es una instrucciï¿½n de MEM es vï¿½lida
     		Reg_Rs_ID: in  STD_LOGIC_VECTOR (4 downto 0); --registros Rs y Rt en la etapa ID
 		  	Reg_Rt_ID	: in  STD_LOGIC_VECTOR (4 downto 0);
 			MemRead_EX	: in std_logic; -- informaciÃ³n sobre la instrucciÃ³n en EX (destino, si lee de memoria y si escribe en registro)
@@ -21,11 +21,11 @@ entity UD is
 			IR_op_code	: in  STD_LOGIC_VECTOR (5 downto 0); -- cÃ³digo de operaciÃ³n de la instrucciÃ³n en IEEE
          	salto_tomado			: in std_logic; -- 1 cuando se produce un salto 0 en caso contrario
          	--Nuevo
-         	JAL_EX : in std_logic; -- Indica que la instrucción en EX es un JAL
-         	JAL_MEM : in std_logic; -- Indica que la instrucción en MEM es un JAL
-         	Mem_ready: in std_logic; -- 1 cuando la memoria puede realizar la operación solicitada en el ciclo actual
-			parar_MIPS: out  STD_LOGIC; -- Indica que hay que detener todo el procesador porque la etapa MEM no está preparada
-         	Kill_IF		: out  STD_LOGIC; -- Indica que la instrucción en IF no debe ejecutarse (fallo en la predicción de salto tomado)
+         	JAL_EX : in std_logic; -- Indica que la instrucciï¿½n en EX es un JAL
+         	JAL_MEM : in std_logic; -- Indica que la instrucciï¿½n en MEM es un JAL
+         	Mem_ready: in std_logic; -- 1 cuando la memoria puede realizar la operaciï¿½n solicitada en el ciclo actual
+			parar_MIPS: out  STD_LOGIC; -- Indica que hay que detener todo el procesador porque la etapa MEM no estï¿½ preparada
+         	Kill_IF		: out  STD_LOGIC; -- Indica que la instrucciï¿½n en IF no debe ejecutarse (fallo en la predicciï¿½n de salto tomado)
 			Parar_ID		: out  STD_LOGIC -- Indica que las etapas ID e IF deben parar
 			); 
 end UD;
@@ -40,74 +40,77 @@ CONSTANT RET_opcode : STD_LOGIC_VECTOR (5 downto 0) := "000110";
 begin
 -------------------------------------------------------------------------------------------------------------------------------
 -- Kill_IF:
--- da la orden de matar la instrucción que se ha leído en Fetch
--- Se debe activar cada vez que se salte (entrada salto_tomado), ya que por defecto se ha hecho el fetch de la instrucción siguiente al salto y si se salta no hay que ejecutarla
+-- da la orden de matar la instrucciï¿½n que se ha leï¿½do en Fetch
+-- Se debe activar cada vez que se salte (entrada salto_tomado), ya que por defecto se ha hecho el fetch de la instrucciï¿½n siguiente al salto y si se salta no hay que ejecutarla
 -- IMPORTANTE: 
--- 	* si una instrucción de salto no tiene sus operandos disponibles no sabe si debe saltar o no (para el BEQ), o a dónde saltar en el caso de la RET. Da igual lo que diga salto tomado. Hay que parar y esperar a tener los operandos
--- 	* si la instrucción que hay en ID no es válida hay que ignorarla cuando nos dice que va a saltar (igual que si nos dice cualuier otra cosa), sólo hacmeos caso a las instrucciones válidas
+-- 	* si una instrucciï¿½n de salto no tiene sus operandos disponibles no sabe si debe saltar o no (para el BEQ), o a dï¿½nde saltar en el caso de la RET. Da igual lo que diga salto tomado. Hay que parar y esperar a tener los operandos
+-- 	* si la instrucciï¿½n que hay en ID no es vï¿½lida hay que ignorarla cuando nos dice que va a saltar (igual que si nos dice cualuier otra cosa), sï¿½lo hacmeos caso a las instrucciones vï¿½lidas
 -- Completar: activar Kill_IF cuando proceda
 	
 	Kill_IF <= '0';
 -------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------
--- Detección de dependencias de datos:	
+-- Detecciï¿½n de dependencias de datos:	
 -- Completar:
--- El código incluye un ejemplo: dep_rs_EX. Debéis completar el resto de opciones.	
+-- El cï¿½digo incluye un ejemplo: dep_rs_EX. Debï¿½is completar el resto de opciones.	
 	
-	-- las I en ID y EX son válidas. La I en EX escribe en el registro rs y la I en ID lee rs (NOP, RTE y JAL no leen rs)
+	-- las I en ID y EX son vï¿½lidas. La I en EX escribe en el registro rs y la I en ID lee rs (NOP, RTE y JAL no leen rs)
 	dep_rs_EX 	<= 	'1' when ((valid_I_EX = '1') AND (valid_I_ID = '1') AND (Reg_Rs_ID = RW_EX) and (RegWrite_EX = '1') and (IR_op_code /= NOP) and (IR_op_code /= RTE_opcode) and (IR_op_code /= JAL_opcode))	else '0';
 								
 	-- la I en Mem escribe en el registro rs y la I en ID no es un NOP ni RTE ni JAL
-	dep_rs_Mem	<= 	'0';
+	dep_rs_Mem 	<= 	'1' when ((valid_I_ID = '1') and (RegWrite_Mem = '1') and (RW_Mem = Reg_Rs_ID) and (IR_op_code /= NOP) and (IR_op_code /= RTE_opcode) and (IR_op_code /= JAL_opcode)) else '0';
+
 							
 	-- Dependencia de enteros. La I en EX escribe en el registro rt y la I en ID no es un NOP ni un Lw, ni RTE
-	dep_rt_EX	<= 	'0';
+	dep_rt_EX <= '1' when ((valid_I_ID = '1') and (RegWrite_EX = '1') and (RW_EX = Reg_Rt_ID) and (IR_op_code /= NOP) and (IR_op_code /= LW) and (IR_op_code /= RTE_opcode)) else '0';
+
 								
 	-- Dependencia de enteros. La I en Mem escribe en el registro rt y la I en ID no es un NOP ni un Lw, ni RTE
-	dep_rt_Mem	<= 	'0';
+	dep_rt_Mem	<= 	'1' when ((valid_I_ID = '1') and (RegWrite_ = '1') and (RW_Mem = Reg_Rt_ID) and (IR_op_code /= NOP) and (IR_op_code /= LW) and (IR_op_code /= RTE_opcode)) else '0';
 
 -------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------
 -- Completar:
 -- Riesgos de datos:
-	-- 1) lw_uso: Si hay dependencia y la instrucción en EX es lw tenemos un lw_uso
-	ld_uso_rs <= 	'0';
-	ld_uso_rt <= 	'0';	
+	-- 1) lw_uso: Si hay dependencia y la instrucciï¿½n en EX es lw tenemos un lw_uso
+	ld_uso_rs <= '1' when (dep_rs_EX = '1' and MemRead_EX = '1') else '0';
+	ld_uso_rt <= '1' when (dep_rt_EX = '1' and MemRead_EX = '1') else '0';	
 									
 	-- 2) BEQ: si hay dependencias y la I en ID es un BEQ es un riesgo porque el BEQ lee los datos en ID, y no tenemos red de cortos en esa etapa
-	BEQ_rs	<= 	'0';
-	BEQ_rt	<= 	'0';
+	BEQ_rs	<= 	'1' when ((dep_rs_EX = '1' or dep_rs_Mem = '1') and IR_op_code = BEQ) else '0';
+	BEQ_rt	<= 	'1' when ((dep_rt_EX = '1' or dep_rt_Mem = '1') and IR_op_code = BEQ) else '0';
 		
-	-- 3) RET: Dependencia similar al BEQ, pero hay que tener en cuenta que RET sólo usa Rs
+	-- 3) RET: Dependencia similar al BEQ, pero hay que tener en cuenta que RET sï¿½lo usa Rs
 	
-	RET_rs	<= 	'0';
+	RET_rs	<= 	'1' when ((dep_rs_EX = '1' or dep_rs_Mem = '1') and IR_op_code = RET) else '0';
 	
-	-- 4) JAL: se puede gestionar de varias formas. Una de ellas es detener. No es obligatorio detener en los JAL, pero si se hace usad estas señales. Si no necesitáis detener, basta con dejarlas a 0
+	-- 4) JAL: se puede gestionar de varias formas. Una de ellas es detener. No es obligatorio detener en los JAL, pero si se hace usad estas seï¿½ales. Si no necesitï¿½is detener, basta con dejarlas a 0
 	
 	JAL_uso_rs	<= 	'0';
 	JAL_uso_rt <= 	'0';
 	
 	-- Si se cumple alguna de las condiciones de riesgo de datos se detienen las etapas IF e ID
 	riesgo_datos_ID <= BEQ_rt OR BEQ_rs OR ld_uso_rs OR ld_uso_rt OR RET_rs OR JAL_uso_rs OR JAL_uso_rt;
-	-- IMPORTANTE: sólo hay riesgos de datos si la instrucción en ID es válida
-	-- Si se da la orden de parar en MEM, también hay que parar ID. En el proyecto 1 no hace falta, pero lo ponemos para no tener que tocarlo luego
+	-- IMPORTANTE: sï¿½lo hay riesgos de datos si la instrucciï¿½n en ID es vï¿½lida --> aÃ±adiido (valid_I_EX = '1') en todos los cÃ¡lculos de dependencias
+	-- Si se da la orden de parar en MEM, tambiï¿½n hay que parar ID. En el proyecto 1 no hace falta, pero lo ponemos para no tener que tocarlo luego
 	Parar_ID <= riesgo_datos_ID;
 -------------------------------------------------------------------------------------------------------------------------------
-	-- parar_MIPS: se utiliza para parar todo el procesador cuando la memoria no puede realizar la operación solicitada en el ciclo actual (es decir cuando Mem_ready es 0). 
-	-- ¿Por qué paramos todo el procesador y no sólo la etapa de memoria y las anteriores? 
-		-- La razón es que si no se detien se pueden perder datos que se iban a anticipar. En el siguiente ejemplo se ve:
+	-- parar_MIPS: se utiliza para parar todo el procesador cuando la memoria no puede realizar la operaciï¿½n solicitada en el ciclo actual (es decir cuando Mem_ready es 0). 
+	-- ï¿½Por quï¿½ paramos todo el procesador y no sï¿½lo la etapa de memoria y las anteriores? 
+		-- La razï¿½n es que si no se detien se pueden perder datos que se iban a anticipar. En el siguiente ejemplo se ve:
 		-- ADD R1, R2, R3  F  D  E  M  W
 		-- LW   R8, 0(R7)     F  D  E  M  M  M  M  M  W
 		-- ADD R6, R1, R4        F  D  E  E  E  E  E  M  W
-		-- ADD R6 no puede leer R1 en ID, pero no para porque puede anticiparlo. Sin embargo el LW R8 detiene su ejecución varios ciclos porque la memoria no está preparada.
-		-- Si permitimos que ADD R1 continue, el dato que queriamos anticipar desaparece, y cuando ADD R6 vaya a leerlo no estará. 
-		-- La solución es parar también ADD R1:
+		-- ADD R6 no puede leer R1 en ID, pero no para porque puede anticiparlo. Sin embargo el LW R8 detiene su ejecuciï¿½n varios ciclos porque la memoria no estï¿½ preparada.
+		-- Si permitimos que ADD R1 continue, el dato que queriamos anticipar desaparece, y cuando ADD R6 vaya a leerlo no estarï¿½. 
+		-- La soluciï¿½n es parar tambiï¿½n ADD R1:
 		-- ADD R1, R2, R3  F  D  E  M  W  W  W  W  W  
 		-- LW   R8, 0(R7)     F  D  E  M  M  M  M  M  W
 		-- ADD R6, R1, R4        F  D  E  E  E  E  E  M  W
-		-- De esta forma ADD R6 puede realizar su anticipación. Escribir varias veces el mismo dato no consume energía, así que tampoco hay ninguna penalización real. En todo caso, si no queréis escribir varias veces el mismo dato en BR, podéis inhabilitar la escritura en el banco de registros cuando se detiene el mips.
-	-- Completar:	
-	parar_MIPS <= '0';
+		-- De esta forma ADD R6 puede realizar su anticipaciï¿½n. Escribir varias veces el mismo dato no consume energï¿½a, asï¿½ que tampoco hay ninguna penalizaciï¿½n real. En todo caso, si no querï¿½is escribir varias veces el mismo dato en BR, podï¿½is inhabilitar la escritura en el banco de registros cuando se detiene el mips.
+	-- Completar:
+	Mem_ready = '0' when () else '1';	
+	parar_MIPS <= '1' when (Mem_ready = '0') else '0';
 -------------------------------------------------------------------------------------------------------------------------------
 end Behavioral;
 
