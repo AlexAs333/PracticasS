@@ -398,7 +398,7 @@ begin
 	-- Interacci�n con las excepciones:
 	-- Si el procesador entero est� parado no procesamos la excepci�n
 	-- Si estamos parados en ID, s� que la procesamos (nos da igual la instrucci�n en ID, la vamos a matar)
-	load_PC <= '1'; 
+	load_PC <= '0' when (parar_MIPS = '1' or parar_ID = '1') else '1'; 
 	-- Fin completar;
 	------------------------------------------------------------------------------------
 	------------------------------------------------------------------------------------
@@ -519,7 +519,7 @@ begin
 	reset_EX <= (reset or Exception_accepted);
 	-- Banco ID/EX parte de enteros
 	-- COMPLETAR: Si para_MIPS se activa hay que detener la ejecuci�n, y mantener cada instrucci�n en su etapa actual
-	load_EX <= '1';
+	load_EX <= '0' when (parar_MIPS = '1') else '1';
 	Banco_ID_EX: Banco_EX PORT MAP ( 	clk => clk, reset => reset_EX, load => load_EX, busA => busA, busB => busB, busA_EX => busA_EX, busB_EX => busB_EX,
 						RegDst_ID => RegDst_ID, ALUSrc_ID => ALUSrc_ID, MemWrite_ID => MemWrite_ID, MemRead_ID => MemRead_ID,
 						MemtoReg_ID => MemtoReg_ID, RegWrite_ID => RegWrite_ID, RegDst_EX => RegDst_EX, ALUSrc_EX => ALUSrc_EX,
@@ -568,11 +568,11 @@ begin
 	valid_I_MEM_in <= valid_I_EX and not(Exception_accepted);
 	-- Nuevo: si paramos en EX no hay que cargar una instrucci�n nueva en la etap MEM
 	-- COMPLETAR: Si para_MIPS se activa hay que detener la ejecuci�n, y mantener cada instrucci�n en su etapa actual
-	load_MEM <= '1';
+	load_MEM <= '0' when (parar_MIPS = '1') else '1';
 	Banco_EX_MEM: Banco_MEM PORT MAP ( 	ALU_out_EX => ALU_out_EX, ALU_out_MEM => ALU_out_MEM, clk => clk, reset => reset_MEM, load => load_MEM, MemWrite_EX => MemWrite_EX,
 										MemRead_EX => MemRead_EX, MemtoReg_EX => MemtoReg_EX, RegWrite_EX => RegWrite_EX, MemWrite_MEM => MemWrite_MEM, MemRead_MEM => MemRead_MEM,
 										MemtoReg_MEM => MemtoReg_MEM, RegWrite_MEM => RegWrite_MEM, 
-										--COMPLETAR: Si usamos BusB_EX los sw no podr�n hacer cortos en rt
+										--COMPLETAR: Si usamos BusB_EX los sw no podr�n hacer cortos en rt --FALTA
 										-- �qu� se�al debemos usar para utilizar la red de cortos?
 										-- Soluci�n
 										BusB_EX => BusB_EX,  
@@ -609,7 +609,7 @@ begin
 	    	
 	-- Nuevo: si paramos en EX no hay que cargar una instrucci�n nueva en la etap MEM
 	-- COMPLETAR: Si para_MIPS se activa hay que detener la ejecuci�n, y mantener cada instrucci�n en su etapa actual
-	load_WB <= '1';
+	load_WB <= '0' when (parar_MIPS = '1') else '1';
 	
 	Banco_MEM_WB: Banco_WB PORT MAP ( 	ALU_out_MEM => ALU_out_MEM, ALU_out_WB => ALU_out_WB, Mem_out => Mem_out, MDR => MDR, clk => clk, reset => reset, load => load_WB, 
 										MemtoReg_MEM => MemtoReg_MEM, RegWrite_MEM => RegWrite_MEM, MemtoReg_WB => MemtoReg_WB, RegWrite_WB => RegWrite_WB, 
@@ -630,7 +630,7 @@ begin
 	
 
 --------------------------------------------------------------------------------------------------
------------ COMPLETAR
+----------- COMPLETAR --FALTA
 ----------- Contadores de eventos.  Nos permiten calcular m�tricas de rendimiento como el CPI y comprobar que se han producido las detenciones esperadas
 -------------------------------------------------------------------------------------------------- 
 	-- Contador de ciclos totales

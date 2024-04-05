@@ -109,7 +109,7 @@ begin
 		-- ADD R6, R1, R4        F  D  E  E  E  E  E  M  W
 		-- De esta forma ADD R6 puede realizar su anticipaci�n. Escribir varias veces el mismo dato no consume energ�a, as� que tampoco hay ninguna penalizaci�n real. En todo caso, si no quer�is escribir varias veces el mismo dato en BR, pod�is inhabilitar la escritura en el banco de registros cuando se detiene el mips.
 	-- Completar:
-	Mem_ready = '0' when () else '1';	
+	Mem_ready = '1' when (MemRead_EX = '0' and RegWrite_Mem = '0') else '0';	
 	parar_MIPS <= '1' when (Mem_ready = '0') else '0';
 -------------------------------------------------------------------------------------------------------------------------------
 end Behavioral;
