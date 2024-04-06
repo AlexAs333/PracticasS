@@ -397,7 +397,7 @@ begin
 	-- Interacci�n con las excepciones:
 	-- Si el procesador entero est� parado no procesamos la excepci�n
 	-- Si estamos parados en ID, s� que la procesamos (nos da igual la instrucci�n en ID, la vamos a matar)
-load_PC <= '0' when (parar_MIPS = '1' or (parar_ID = '1' and Exception_accepted = '0'))  else '1'; 
+  load_PC <= '0' when (parar_MIPS = '1' or (parar_ID = '1' and Exception_accepted = '0'))  else '1';
 	-- Fin completar;
 	------------------------------------------------------------------------------------
 	------------------------------------------------------------------------------------
@@ -411,12 +411,12 @@ load_PC <= '0' when (parar_MIPS = '1' or (parar_ID = '1' and Exception_accepted 
 	-- El orden asigna prioridad si se cumplen dos o m�s condiciones	
 		
 	PC_in <= 	x"00000008" 		when (Exception_accepted = '1') and (Data_abort = '1') else -- Si llega un data abort saltamos a la direcci�n 0x00000008
-				x"0000000C" 		when (Exception_accepted = '1') and (UNDEF = '1') else -- Si llega un UNDEF saltamos a la direcci�n 0x0000000C
-				x"00000004" 		when (Exception_accepted = '1') and (IRQ = '1') else -- Si llega una IRQ saltamos a la direcci�n 0x00000004
-			Exception_LR_output when RTE_ID = '1'  and valid_I_ID = '1' else  	--@ retorno. Si es una RTE volvemos a la @ que ten�amos almacenada en el Exception_LR		
-		busA when (RET_ID = '1') else 	--Se elige la direcci�n almacenada en el registro Rs que sale por el puerto A del BR
-				Dirsalto_ID 		when salto_tomado = '1' else --@ Salto de las BEQ y JAL. Las RTE y RET tambi�n puede activar la se�al de salto, pero por el orden del when se elegir�n las opciones anteriores
-				PC4; -- PC+4
+				    x"0000000C" 		when (Exception_accepted = '1') and (UNDEF = '1') else -- Si llega un UNDEF saltamos a la direcci�n 0x0000000C
+				    x"00000004" 		when (Exception_accepted = '1') and (IRQ = '1') else -- Si llega una IRQ saltamos a la direcci�n 0x00000004
+				    Exception_LR_output when RTE_ID = '1'  and valid_I_ID = '1' else  	--@ retorno. Si es una RTE volvemos a la @ que ten�amos almacenada en el Exception_LR		
+				    busA when (RET_ID = '1') else 	--Se elige la direcci�n almacenada en el registro Rs que sale por el puerto A del BR
+				    Dirsalto_ID 		when salto_tomado = '1' else --@ Salto de las BEQ y JAL. Las RTE y RET tambi�n puede activar la se�al de salto, pero por el orden del when se elegir�n las opciones anteriores
+				    PC4; -- PC+4
 				
 								
 	------------------------------------------------------------------------------------
@@ -435,7 +435,8 @@ load_PC <= '0' when (parar_MIPS = '1' or (parar_ID = '1' and Exception_accepted 
 	-- NUEVO: en pr�cticas no se paraba nunca.
 	-- Parar_ID detiene la etapa ID y �tambi�n debe parar la anterior! Eso �ltimo lo deb�is hacer vosotros.
 	-- Completar: tambi�n hay que parar cuando se active parar_MIPS
-load_ID <= '0' when (parar_MIPS = '1' or parar_ID = '1') else '1'; 
+	--load_ID <= not(parar_ID);
+  load_ID <= '0' when (parar_MIPS = '1' or parar_ID = '1') else '1'; 
 
 	Banco_IF_ID: Banco_ID port map (	IR_in => IR_in, PC4_in => PC4, clk => clk, reset => reset_ID, load => load_ID, IR_ID => IR_ID, PC4_ID => PC4_ID, 
 										--Nuevo
@@ -492,7 +493,7 @@ load_ID <= '0' when (parar_MIPS = '1' or parar_ID = '1') else '1';
 	-- IMPORTANTE: para detectar una relacci�n productor consumidor deb�is comprobar las dos cosas, que hay un productor, y tambi�n un consumidor. 
 	-- No todas las instrucciones producen/escriben datos en el BR, ni todas consumen/leen los dos operandos (rs y rt)
 	-- NUEVO: parar_MIPS: se utiliza para parar todo el procesador cuando la memoria no puede realizar la operaci�n solicitada en el ciclo actual (es decir cuando Mem_ready es 0). 
-	--Kill_IF <= '1' when (salto_tomado = '1' or valid_I_ID = '1') else '0';	
+		
 	
 	-------------------------------------------------------------------------------------
 	
@@ -518,7 +519,8 @@ load_ID <= '0' when (parar_MIPS = '1' or parar_ID = '1') else '1';
 	reset_EX <= (reset or Exception_accepted);
 	-- Banco ID/EX parte de enteros
 	-- COMPLETAR: Si para_MIPS se activa hay que detener la ejecuci�n, y mantener cada instrucci�n en su etapa actual
-	load_EX <= '0' when (parar_MIPS = '1') else '1';
+	--load_EX <= '1';
+  load_EX <= not(parar_MIPS); 
 	Banco_ID_EX: Banco_EX PORT MAP ( 	clk => clk, reset => reset_EX, load => load_EX, busA => busA, busB => busB, busA_EX => busA_EX, busB_EX => busB_EX,
 						RegDst_ID => RegDst_ID, ALUSrc_ID => ALUSrc_ID, MemWrite_ID => MemWrite_ID, MemRead_ID => MemRead_ID,
 						MemtoReg_ID => MemtoReg_ID, RegWrite_ID => RegWrite_ID, RegDst_EX => RegDst_EX, ALUSrc_EX => ALUSrc_EX,
@@ -567,7 +569,8 @@ load_ID <= '0' when (parar_MIPS = '1' or parar_ID = '1') else '1';
 	valid_I_MEM_in <= valid_I_EX and not(Exception_accepted);
 	-- Nuevo: si paramos en EX no hay que cargar una instrucci�n nueva en la etap MEM
 	-- COMPLETAR: Si para_MIPS se activa hay que detener la ejecuci�n, y mantener cada instrucci�n en su etapa actual
-	load_MEM <= '0' when (parar_MIPS = '1') else '1';
+	--load_MEM <= '1';
+  load_MEM <= not(parar_MIPS);
 	Banco_EX_MEM: Banco_MEM PORT MAP ( 	ALU_out_EX => ALU_out_EX, ALU_out_MEM => ALU_out_MEM, clk => clk, reset => reset_MEM, load => load_MEM, MemWrite_EX => MemWrite_EX,
 										MemRead_EX => MemRead_EX, MemtoReg_EX => MemtoReg_EX, RegWrite_EX => RegWrite_EX, MemWrite_MEM => MemWrite_MEM, MemRead_MEM => MemRead_MEM,
 										MemtoReg_MEM => MemtoReg_MEM, RegWrite_MEM => RegWrite_MEM, 
@@ -608,7 +611,8 @@ load_ID <= '0' when (parar_MIPS = '1' or parar_ID = '1') else '1';
 	    	
 	-- Nuevo: si paramos en EX no hay que cargar una instrucci�n nueva en la etap MEM
 	-- COMPLETAR: Si para_MIPS se activa hay que detener la ejecuci�n, y mantener cada instrucci�n en su etapa actual
-	load_WB <= '0' when (parar_MIPS = '1') else '1';
+	--load_WB <= '1';
+  load_WB <= not(parar_MIPS);
 	
 	Banco_MEM_WB: Banco_WB PORT MAP ( 	ALU_out_MEM => ALU_out_MEM, ALU_out_WB => ALU_out_WB, Mem_out => Mem_out, MDR => MDR, clk => clk, reset => reset, load => load_WB, 
 										MemtoReg_MEM => MemtoReg_MEM, RegWrite_MEM => RegWrite_MEM, MemtoReg_WB => MemtoReg_WB, RegWrite_WB => RegWrite_WB, 
@@ -662,11 +666,11 @@ load_ID <= '0' when (parar_MIPS = '1' or parar_ID = '1') else '1';
 	------------------------------------------------------------------------------------
 	-- Completar:
 	inc_cycles <= '1';--Done
-inc_I <= '1' when ((valid_I_ID = '1') and (load_PC = '1')) else '0'; --completar
-inc_data_stalls <= '1' when((parar_ID = '1') and (parar_MIPS = '0')) else '0'; --completar
-inc_control_stalls <= '1' when(kill_IF = '1') else '0'; --completar
-inc_Exceptions <= '1' when(Exception_accepted = '1') else '0';--completar
-inc_Mem_stalls <= '1' when(parar_MIPS = '1') else '0'; --completar
+	inc_I <= '1' when ((valid_I_ID = '1') and (load_PC = '1')) else '0'; --completar
+	inc_data_stalls <= '1' when((parar_ID = '1') and (parar_MIPS = '0')) else '0'; --completar
+	inc_control_stalls <= '1' when(kill_IF = '1') else '0'; --completar
+	inc_Exceptions <= '1' when(Exception_accepted = '1') else '0';--completar
+	inc_Mem_stalls <= '1' when(parar_MIPS = '1') else '0'; --completar
 	
 	------------------------------------------------------------------------------------			
 end Behavioral;

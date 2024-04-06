@@ -59,13 +59,13 @@ Begin
 	-- Completar: falta la l�gica que detecta cu�ndo se va a procesar una excepci�n: cuando se recibe una de las se�ales (IRQ, Data_abort y Undef) y las excepciones est�n habilitadas (MIPS_status(1)='0')
 	-- IMPORTANTE: No hay que actualizar nada si el MIPS est� parado
 	
-update_status	<= '1' when ((parar_MIPS = '0') and ((IRQ = '1') or (Data_abort = '1') or (UNDEF = '1')) and (MIPS_status(1) = '0')) else
-'1' when ((parar_MIPS = '0') and (((RTE_ID = '1') and (valid_I_ID = '1')) or ((RTE_EX = '1') and (valid_I_EX = '1')))) else
-'0';
+  update_status	<= '1' when ((parar_MIPS = '0') and ((IRQ = '1') or (Data_abort = '1') or (UNDEF = '1')) and (MIPS_status(1) = '0')) else
+                   '1' when ((parar_MIPS = '0') and (((RTE_ID = '1') and (valid_I_ID = '1')) or ((RTE_EX = '1') and (valid_I_EX = '1')))) else
+                   '0';
 	
 	-- Completar:se procesa una excepci�n si se recibe IRQ, Abort o Undef y las excepciones est�n habilitadas (MIPS_status(1)='0') y el procesador no est� parado (parar_MIPS = '0')
 	-- se define una se�al interna para poder leerla en el m�dulo (las se�ales de salida, como Exception_accepted, no se pueden leer)
-Exception_accepted_internal <= '1' when ((parar_MIPS = '0') and ((IRQ = '1') or (Data_abort = '1') or (UNDEF = '1')) and (MIPS_status(1) = '0')) else '0';
+  Exception_accepted_internal <= '1' when ((parar_MIPS = '0') and ((IRQ = '1') or (Data_abort = '1') or (UNDEF = '1')) and (MIPS_status(1) = '0')) else '0';  -- Hemos quitado update_status = '1'
 	Exception_accepted <= Exception_accepted_internal;
 	-- Fin completar;
 	------------------------------------------------------------------------------------
