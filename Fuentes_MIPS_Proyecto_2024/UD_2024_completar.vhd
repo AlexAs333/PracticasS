@@ -47,7 +47,7 @@ begin
 -- 	* si la instrucci�n que hay en ID no es v�lida hay que ignorarla cuando nos dice que va a saltar (igual que si nos dice cualuier otra cosa), s�lo hacmeos caso a las instrucciones v�lidas
 -- Completar: activar Kill_IF cuando proceda
 	
-	Kill_IF <= '0';
+Kill_IF <= '1' when ((salto_tomado = '1') AND (valid_I_ID = '1') AND (riesgo_datos_ID = '0')) else '0';
 -------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------
 -- Detecci�n de dependencias de datos:	
@@ -109,7 +109,7 @@ begin
 		-- ADD R6, R1, R4        F  D  E  E  E  E  E  M  W
 		-- De esta forma ADD R6 puede realizar su anticipaci�n. Escribir varias veces el mismo dato no consume energ�a, as� que tampoco hay ninguna penalizaci�n real. En todo caso, si no quer�is escribir varias veces el mismo dato en BR, pod�is inhabilitar la escritura en el banco de registros cuando se detiene el mips.
 	-- Completar:
-	Mem_ready = '1' when (MemRead_EX = '0' and RegWrite_Mem = '0') else '0';	
+	--Mem_ready = '1' when (MemRead_EX = '0' and RegWrite_Mem = '0') else '0';	
 	parar_MIPS <= '1' when (Mem_ready = '0') else '0';
 -------------------------------------------------------------------------------------------------------------------------------
 end Behavioral;
