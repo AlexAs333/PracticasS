@@ -62,7 +62,7 @@ Kill_IF <= '1' when ((salto_tomado = '1') AND (valid_I_ID = '1') AND (riesgo_dat
 
 							
 	-- Dependencia de enteros. La I en EX escribe en el registro rt y la I en ID no es un NOP ni un Lw, ni RTE
-	dep_rt_EX <= '1' when ((valid_I_ID = '1') and (RegWrite_EX = '1') and (RW_EX = Reg_Rt_ID) and (IR_op_code /= NOP) and (IR_op_code /= LW) and (IR_op_code /= RTE_opcode)) else '0';
+	dep_rt_EX <= '1' when ((valid_I_ID = '1') and (RegWrite_EX = '1') and (RW_EX = Reg_Rt_ID) and (IR_op_code /= NOP) and (IR_op_code /= LW) and (IR_op_code /= RTE_opcode) and (IR_op_code /= JAL_opcode)) else '0';
 
 								
 	-- Dependencia de enteros. La I en Mem escribe en el registro rt y la I en ID no es un NOP ni un Lw, ni RTE

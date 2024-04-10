@@ -19,7 +19,7 @@ protected:
         }
     }
 public:
-    Shell() : Nodo( "/", Directorio){
+    Shell() : Nodo( "/", 0, Directorio){
         //inicializar árbol
     }
     string pwd(){
@@ -33,7 +33,13 @@ public:
 
     }
     void vi(string name, int size){
-
+        //ponerse en ruta
+        if(!fichero){
+            Fichero(name, size);
+        }
+        else{
+            cambiarTamaño(name, size);
+        }
     }
     void mkdir(string name){
         string ruta;

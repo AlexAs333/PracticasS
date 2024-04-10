@@ -1,70 +1,70 @@
 v 4
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "mux4_1.vhd" "77e61d225e8903760cce4b3e7e6390eff88901d5" "20240406222928.894":
-  entity mux4_1 at 20( 493) + 0 on 4651;
-  architecture behavioral of mux4_1 at 41( 1197) + 0 on 4652;
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "mux2_1.vhd" "16c03f03addbb8a3f3dad9a1da21f497d0aa4854" "20240406222928.732":
-  entity mux2_1 at 20( 493) + 0 on 4647;
-  architecture behavioral of mux2_1 at 39( 1069) + 0 on 4648;
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "counter.vhd" "4c787804472fe6172d2d20f4bfdcfb0934d580c9" "20240406222928.521":
-  entity counter at 20( 487) + 0 on 4643;
-  architecture behavioral of counter at 46( 1270) + 0 on 4644;
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "adder32.vhd" "314628325a7fba8ded83ce676b48051d32b99dc4" "20240406222928.344":
-  entity adder32 at 20( 486) + 0 on 4639;
-  architecture behavioral of adder32 at 39( 1097) + 0 on 4640;
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "UC_Mips_2024_completar.vhd" "e2d73287b0740e725cce9b172034833e0c807f4d" "20240406222928.141":
-  entity uc at 6( 267) + 0 on 4635;
-  architecture behavioral of uc at 38( 1489) + 0 on 4636;
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "REGISTER.vhd" "bb1f16639744f39ecc1ef4892185e16345358757" "20240406222927.955":
-  entity reg at 2( 2) + 0 on 4631;
-  architecture behavioral of reg at 15( 421) + 0 on 4632;
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "IO_MD_subsystem.vhd" "455252ea18c1b137c789f2482f7180a16686059b" "20240406222927.516":
-  entity io_data_memory_subsystem at 20( 470) + 0 on 4627;
-  architecture behavioral of io_data_memory_subsystem at 57( 2454) + 0 on 4628;
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "Exception_manager_2024_completar.vhd" "44eece4ce22759aa6d4d28534a378923433cc350" "20240406222927.312":
-  entity exception_manager at 6( 309) + 0 on 4623;
-  architecture behavioral of exception_manager at 29( 1798) + 0 on 4624;
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "Banco_MEM.vhd" "ac4b8b3ab194949e29b7e4c0d8e934e01c59c592" "20240406222927.105":
-  entity banco_mem at 20( 488) + 0 on 4619;
-  architecture behavioral of banco_mem at 71( 2678) + 0 on 4620;
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "Banco_EX.vhd" "57445634bb03f893c9352a376ecd62698d63e32d" "20240406222926.896":
-  entity banco_ex at 20( 487) + 0 on 4615;
-  architecture behavioral of banco_ex at 88( 3392) + 0 on 4616;
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "AOC2_SoC.vhd" "5105383ef5ea414868dc29f477eee582375260a8" "20240406222926.693":
-  entity aoc2_soc at 3( 26) + 2 on 4611;
-  architecture behavior of aoc2_soc at 17( 536) + 2 on 4612;
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "ALU.vhd" "36885e9b9fb1d4260cef66f02b1eb0f5c1fecac1" "20240406222926.588":
-  entity alu at 20( 482) + 0 on 4609;
-  architecture behavioral of alu at 40( 1278) + 0 on 4610;
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "BReg.vhd" "bb69d410cca56dd4f196ac706a7044ffa4091399" "20240406222926.795":
-  entity breg at 20( 481) + 0 on 4613;
-  architecture behavioral of breg at 49( 1525) + 0 on 4614;
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "Banco_ID.vhd" "688b006032428225982a73c4921ea61c8c20d37f" "20240406222927.023":
-  entity banco_id at 4( 288) + 0 on 4617;
-  architecture behavioral of banco_id at 24( 1122) + 0 on 4618;
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "Banco_WB.vhd" "09f709cc072c7c47cd795b43ce7f357e3da439d1" "20240406222927.213":
-  entity banco_wb at 20( 487) + 0 on 4621;
-  architecture behavioral of banco_wb at 63( 2304) + 0 on 4622;
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "Ext_signo.vhd" "a86099b57bba8e351753e752f26601c7908ad4f4" "20240406222927.407":
-  entity ext_signo at 20( 488) + 0 on 4625;
-  architecture behavioral of ext_signo at 37( 989) + 0 on 4626;
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "Mips_segmentado_IRQ_2024_completar.vhd" "055b6a6f97f593218391118869c9da66fc6543a1" "20240406222927.686":
-  entity mips_segmentado at 14( 705) + 0 on 4629;
-  architecture behavioral of mips_segmentado at 33( 1599) + 0 on 4630;
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "UA_2024_completar.vhd" "a02d8c40e2b0a5e679482ae6053ddba228d16a99" "20240406222928.040":
-  entity ua at 6( 268) + 0 on 4633;
-  architecture behavioral of ua at 24( 867) + 0 on 4634;
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "UD_2024_completar.vhd" "dcc0f88713626343e6771a9d00bd7950b1609a43" "20240406222928.209":
-  entity ud at 6( 295) + 0 on 4637;
-  architecture behavioral of ud at 32( 1970) + 0 on 4638;
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "bits_shifter.vhd" "84314704fb90b0c3a56bacef575e87f50f736186" "20240406222928.434":
-  entity two_bits_shifter at 20( 491) + 0 on 4641;
-  architecture behavioral of two_bits_shifter at 37( 1003) + 0 on 4642;
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "memoriaRAM_I_tests_exepciones_2024.vhd" "1cac01c8bbd798cb870801b062bab9ab7f32979d" "20240406222928.626":
-  entity memoriaram_i at 20( 491) + 0 on 4645;
-  architecture behavioral of memoriaram_i at 45( 1539) + 0 on 4646;
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "mux2_5bits.vhd" "380d4d9ec33f6a77c2e56b7f36dec5b19b69ff9d" "20240406222928.818":
-  entity mux2_5bits at 20( 489) + 0 on 4649;
-  architecture behavioral of mux2_5bits at 39( 1068) + 0 on 4650;
-file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "testbench_AOC2_SoC.vhd" "6a8a4736e072249a0078c60b7fe0d38823d755fa" "20240406222928.974":
-  entity testbench at 3( 26) + 2 on 4653;
-  architecture behavior of testbench at 10( 149) + 2 on 4654;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "mux4_1.vhd" "77e61d225e8903760cce4b3e7e6390eff88901d5" "20240407215012.523":
+  entity mux4_1 at 20( 493) + 0 on 6027;
+  architecture behavioral of mux4_1 at 41( 1197) + 0 on 6028;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "mux2_1.vhd" "16c03f03addbb8a3f3dad9a1da21f497d0aa4854" "20240407215012.348":
+  entity mux2_1 at 20( 493) + 0 on 6023;
+  architecture behavioral of mux2_1 at 39( 1069) + 0 on 6024;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "counter.vhd" "4c787804472fe6172d2d20f4bfdcfb0934d580c9" "20240407215012.134":
+  entity counter at 20( 487) + 0 on 6019;
+  architecture behavioral of counter at 46( 1270) + 0 on 6020;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "adder32.vhd" "314628325a7fba8ded83ce676b48051d32b99dc4" "20240407215011.964":
+  entity adder32 at 20( 486) + 0 on 6015;
+  architecture behavioral of adder32 at 39( 1097) + 0 on 6016;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "UC_Mips_2024_completar.vhd" "e2d73287b0740e725cce9b172034833e0c807f4d" "20240407215011.754":
+  entity uc at 6( 267) + 0 on 6011;
+  architecture behavioral of uc at 38( 1489) + 0 on 6012;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "REGISTER.vhd" "bb1f16639744f39ecc1ef4892185e16345358757" "20240407215011.566":
+  entity reg at 2( 2) + 0 on 6007;
+  architecture behavioral of reg at 15( 421) + 0 on 6008;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "IO_MD_subsystem.vhd" "455252ea18c1b137c789f2482f7180a16686059b" "20240407215011.126":
+  entity io_data_memory_subsystem at 20( 470) + 0 on 6003;
+  architecture behavioral of io_data_memory_subsystem at 57( 2454) + 0 on 6004;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "Exception_manager_2024_completar.vhd" "44eece4ce22759aa6d4d28534a378923433cc350" "20240407215010.938":
+  entity exception_manager at 6( 309) + 0 on 5999;
+  architecture behavioral of exception_manager at 29( 1798) + 0 on 6000;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "Banco_MEM.vhd" "ac4b8b3ab194949e29b7e4c0d8e934e01c59c592" "20240407215010.699":
+  entity banco_mem at 20( 488) + 0 on 5995;
+  architecture behavioral of banco_mem at 71( 2678) + 0 on 5996;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "Banco_EX.vhd" "57445634bb03f893c9352a376ecd62698d63e32d" "20240407215010.443":
+  entity banco_ex at 20( 487) + 0 on 5991;
+  architecture behavioral of banco_ex at 88( 3392) + 0 on 5992;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "AOC2_SoC.vhd" "5105383ef5ea414868dc29f477eee582375260a8" "20240407215010.250":
+  entity aoc2_soc at 3( 26) + 2 on 5987;
+  architecture behavior of aoc2_soc at 17( 536) + 2 on 5988;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "ALU.vhd" "36885e9b9fb1d4260cef66f02b1eb0f5c1fecac1" "20240407215010.165":
+  entity alu at 20( 482) + 0 on 5985;
+  architecture behavioral of alu at 40( 1278) + 0 on 5986;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "BReg.vhd" "bb69d410cca56dd4f196ac706a7044ffa4091399" "20240407215010.353":
+  entity breg at 20( 481) + 0 on 5989;
+  architecture behavioral of breg at 49( 1525) + 0 on 5990;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "Banco_ID.vhd" "688b006032428225982a73c4921ea61c8c20d37f" "20240407215010.555":
+  entity banco_id at 4( 288) + 0 on 5993;
+  architecture behavioral of banco_id at 24( 1122) + 0 on 5994;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "Banco_WB.vhd" "09f709cc072c7c47cd795b43ce7f357e3da439d1" "20240407215010.828":
+  entity banco_wb at 20( 487) + 0 on 5997;
+  architecture behavioral of banco_wb at 63( 2304) + 0 on 5998;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "Ext_signo.vhd" "a86099b57bba8e351753e752f26601c7908ad4f4" "20240407215011.041":
+  entity ext_signo at 20( 488) + 0 on 6001;
+  architecture behavioral of ext_signo at 37( 989) + 0 on 6002;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "Mips_segmentado_IRQ_2024_completar.vhd" "055b6a6f97f593218391118869c9da66fc6543a1" "20240407215011.299":
+  entity mips_segmentado at 14( 705) + 0 on 6005;
+  architecture behavioral of mips_segmentado at 33( 1599) + 0 on 6006;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "UA_2024_completar.vhd" "a02d8c40e2b0a5e679482ae6053ddba228d16a99" "20240407215011.645":
+  entity ua at 6( 268) + 0 on 6009;
+  architecture behavioral of ua at 24( 867) + 0 on 6010;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "UD_2024_completar.vhd" "dcc0f88713626343e6771a9d00bd7950b1609a43" "20240407215011.852":
+  entity ud at 6( 295) + 0 on 6013;
+  architecture behavioral of ud at 32( 1970) + 0 on 6014;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "bits_shifter.vhd" "84314704fb90b0c3a56bacef575e87f50f736186" "20240407215012.054":
+  entity two_bits_shifter at 20( 491) + 0 on 6017;
+  architecture behavioral of two_bits_shifter at 37( 1003) + 0 on 6018;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "memoriaRAM_I_tests_exepciones_2024.vhd" "1d7804b6537c86bba143714928e485c18104525b" "20240407215012.244":
+  entity memoriaram_i at 20( 491) + 0 on 6021;
+  architecture behavioral of memoriaram_i at 45( 1539) + 0 on 6022;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "mux2_5bits.vhd" "380d4d9ec33f6a77c2e56b7f36dec5b19b69ff9d" "20240407215012.430":
+  entity mux2_5bits at 20( 489) + 0 on 6025;
+  architecture behavioral of mux2_5bits at 39( 1068) + 0 on 6026;
+file "/mnt/c/Users/alexa/Desktop/PracticasS/PROYDEBUG/PROYDEBUG/" "testbench_AOC2_SoC.vhd" "6a8a4736e072249a0078c60b7fe0d38823d755fa" "20240407215012.610":
+  entity testbench at 3( 26) + 2 on 6029;
+  architecture behavior of testbench at 10( 149) + 2 on 6030;
