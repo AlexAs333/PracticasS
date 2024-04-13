@@ -11,7 +11,7 @@ protected:
     //Pre: --
     //Post: si hay '/' en el nombre se guarda ../.../ en ruta, el resto en nombre.
     //      Sino no se cambia el nombre
-    void descomponer(string nombre, string ruta){
+    void descomponer(string& nombre, string& ruta){
         size_t posUSlash = nombre.find_last_of('/');
         if (posUSlash != string::npos) { // Si se encuentra al menos un '/'
             ruta = cadena.substr(0, posUSlash);
@@ -19,9 +19,7 @@ protected:
         }
     }
 public:
-    Shell() : Nodo( "/", 0, Directorio){
-        //inicializar árbol
-    }
+    Shell() : Nodo( "/", 0, Directorio){}
     string pwd(){
         return rutaActiva;
     }
