@@ -1,7 +1,7 @@
 PROG:=main
 SRCS:=main.cc
 
-CXX:=g++ -std=c++20 -Wall -Wfatal-errors
+CXX:=g++ -std=c++2a -Wall 	#CXX:=g++ -std=c++20 -Wall -Wfatal-errors
 
 OBJS:=$(SRCS:.cc=.o)
 DEPS:=$(SRCS:.cc=.d)

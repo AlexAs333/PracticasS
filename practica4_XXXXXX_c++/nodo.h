@@ -1,13 +1,20 @@
 #pragma once
 #include <list>
 #include <string>
+#include <memory>
 
 class Nodo{
 protected:
-    string _name;
+    std::string _name;
     int tamagno;
-    string rutaActiva;
 public:
-    Nodo(string n, int t) : _name(n), tamagno(t) {}
-    virtual string name() const = 0;
+    Nodo(std::string n, int t) : _name(n), tamagno(t){}
+
+    virtual int tamagnoNodo() const {
+        return tamagno;
+    }
+
+    std::string name() const {
+        return _name;
+    }
 };
