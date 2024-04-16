@@ -17,7 +17,7 @@ public:
 class borradoDentro : public arbol_ficheros_error{
 public:
     const char* what() const throw(){
-        return "Se está intentando borrar un directorio quu está dentro del path";
+        return "Se está intentando borrar un directorio que está dentro del path";
     }
 };
 

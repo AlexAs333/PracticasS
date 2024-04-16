@@ -5,7 +5,7 @@
 #include "excepciones.h"
 #include <string>
 #include <memory>
-
+#include <iostream>
 class Shell{
 protected:
     Directorio raiz;
@@ -25,12 +25,18 @@ public:
             return ruta.front() -> name();
         }
 		else{ //Caso general
+			char cAtras = 2;
         	for(auto i : ruta){
-            	camino = camino + "/" + i -> name();
-				return camino;
+				if(cAtras){
+					camino += i->name();
+					cAtras--;
+				}
+				else{
+            		camino = camino + "/" + i->name();
+				}
             }
         }
-		return "";	//Para evitar warnings
+		return camino;	//Para evitar warnings
     }
 
 	//------------------------------LS------------------------------
@@ -49,11 +55,11 @@ public:
     void vi(std::string name, int size){
         //excepciones
 		if ((int)name.find("/") != -1 ||  		//EXCEPCIÓN el nombre contiene una barra diagonal
-    		//(int)name.find(".") == -1 ||  		//o si el nombre no contiene ningún punto
-    		name[name.length() - 1] == '.') {	//o si el último carácter es un punto
+    		name == "." || name == ".." || 		//o si el nombre es . o ..
+    		(int)name.find(" ") != -1) {		//o si el último carácter es un punto
     			throw nom();
 		}
-		if (size <= 0) { //EXCEPCIÓN el tamaño es menor o igual a cero
+		if (size < 0) { //EXCEPCIÓN el tamaño es menor o igual a cero
     		throw Etam();
 		}
 
@@ -68,33 +74,33 @@ public:
 			if(std::dynamic_pointer_cast<Enlace> (tipo) != nullptr){	//Es un enlace
 				std::shared_ptr<Enlace> link = std::dynamic_pointer_cast<Enlace> (tipo);	//Puntero para poder acceder a los métodos de enlace (Plink)
 				if(std::dynamic_pointer_cast<Fichero> (link->Plink()) != nullptr){	//Si es un fichero
-					//Cambiar tam Fichero
-					std::shared_ptr<Fichero> fichero = std::dynamic_pointer_cast<Fichero> (link->Plink());	//Puntero para poder acceder a los métodos de fichero (cambiarTam)
-					int tam = fichero->tamagnoNodo();	//Guardamos el tamaño antes de cambiarlo
+					//Cambiar tam Fichero y Directorio
+					std::shared_ptr<Fichero> fichero = std::dynamic_pointer_cast<Fichero> (tipo); 	//Puntero para poder acceder a los métodos de fichero
 					fichero->cambiarTam(size);
-					//Cambiar tam Directorio
-					std :: shared_ptr<Directorio> directorio = fichero->obtenerDir();
-					directorio->cambiarTam(tam, size);
 				}
 				else if(std::dynamic_pointer_cast<Directorio> (link->Plink()) != nullptr){//EXCEPCIÓN se intenta modificar con vi un el enlace a un directorio
 					throw viDir();
 				}
+				else if(std::dynamic_pointer_cast<Enlace> (link->Plink()) != nullptr){//Vuelve a ser un enlace
+					//Recursiva
+				}
 			}
 			else if(std::dynamic_pointer_cast<Fichero> (tipo) != nullptr){	//Es un fichero
-				std::shared_ptr<Fichero> fichero = std::dynamic_pointer_cast<Fichero> (tipo); 	//Puntero para poder acceder a los métodos de fichero (cambiarTam)
+				//Cambiar tam Fichero y Directorio
+				std::shared_ptr<Fichero> fichero = std::dynamic_pointer_cast<Fichero> (tipo); 	//Puntero para poder acceder a los métodos de fichero
 				fichero->cambiarTam(size);
 			}
 		}
 		else{	//El fichero no existe. Creamos uno
-			std::shared_ptr<Fichero> nuevo = std::make_shared<Fichero> (Fichero(name, size, ruta.back()));
-			ruta.back()->guardar(nuevo, size);
+			std::shared_ptr<Fichero> nuevo = std::make_shared<Fichero> (Fichero(name, size));
+			ruta.back()->guardar(nuevo);
 		}
     }
 
 	//------------------------------MKDIR------------------------------
     void mkdir(std::string name){
         std::shared_ptr<Directorio> directorio = std::make_shared<Directorio>(name);
-		ruta.back()->guardar(directorio, 0);
+		ruta.back()->guardar(directorio);
     }
 
 	//------------------------------CD------------------------------
@@ -108,40 +114,58 @@ public:
 				ruta.push_back(root); //Metemos únicamente la raíz calculada antes
 			}
 			//cd .. , excepción si estás en raíz (no se puede volver atrás)
-			if(path == ".."){
-				if(ruta.size() == 1){
+			else if(path == ".."){
+				if(ruta.size() == 1){	//EXCEPCIÓN se intenta ir para atrás estando en la raíz
 					throw estoyRaiz();
-				}else{
+				}
+				else{
 					ruta.pop_back();
 				}
 			}
 		
-			if(path[0] == '.'){ //Tendremos que eliminar de nuestra ruta los ./ o ../ que nos aparezcan para limpiar la ruta 
-				if(path[1] == '.'){
-					cd(".."); //recursiva para que haga lo que hacen los ..
-					path.substr(3); //Quitamos ../ de la ruta
-				}else{
-					path.substr(2); //Quitamos ./ de la ruta
+			else if(path[0] == '.'){ //Tendremos que eliminar de nuestra ruta los ./ o ../ que nos aparezcan para limpiar la ruta 
+				if(path[1] == '.'){	//es ..
+					ruta.pop_back();	//le tiramos para atrás
+					path = path.substr(3); //Quitamos ../ de la ruta
+					cd(path);
+				}
+				else{
+					path = path.substr(2); //Quitamos ./ de la ruta
+					cd(path);
 				}
 			}
-			if(path [0] == '/'){
+			else if(path [0] == '/'){
 				cd("/");
-			}else{
+			}
+			else{
 				std::shared_ptr<Nodo> aux;
-				int aparicionpri = path.find_first_of('/');
-				std :: string subc = path.substr(0, aparicionpri);
-				ruta.back()->existe(subc, aux);
-				/*if(std::dynamic_pointer_cast<Directorio> (aux) != nullptr){	//EXCEPCIÓN se intenta acceder a algo que no es un directorio
-					throw noDir();
-				}*/
-				std::shared_ptr<Directorio> aux2 = std::dynamic_pointer_cast<Directorio> (aux);
-				ruta.push_back(aux2);
-				if(sizeof(path) != aparicionpri){
+				long unsigned int aparicionpri = path.find_first_of('/');
+				if (aparicionpri == path.npos){
+					if(ruta.back()->existe(path, aux)){
+						std::shared_ptr<Directorio> aux2 = std::dynamic_pointer_cast<Directorio> (aux);
+						if(aux2 == nullptr){	//EXCEPCIÓN se intenta acceder a algo que no es un directorio
+						throw noDir();
+						}
+						ruta.push_back(aux2);
+					}
+					else{	//EXCEPCIÓN se intenta acceder a algo que no existe
+						throw noExiste();
+					}
+					
+				}
+				else{
+					std :: string subc = path.substr(0, aparicionpri);
+					ruta.back()->existe(subc, aux);
+					std::shared_ptr<Directorio> aux2 = std::dynamic_pointer_cast<Directorio> (aux);
+					if(aux2 == nullptr){	//EXCEPCIÓN se intenta acceder a algo que no es un directorio
+						throw noDir();
+					}
+					ruta.push_back(aux2);
 					path.erase(0, aparicionpri);
 					cd(path);
 				}
 			}
-		}	
+		}
     }
 	//------------------------------LN------------------------------
     void ln(std::string path, std::string name){
@@ -172,7 +196,7 @@ public:
 		//COMPLETAR : excepciones nombre
 
 		std::shared_ptr<Enlace> enlace = std::make_shared<Enlace>(name, tam, linked);	//Creamos el enlace
-		ruta.back()->guardar(enlace, tam);	//Guardamos el enlace
+		ruta.back()->guardar(enlace);	//Guardamos el enlace
     }
 
 	//------------------------------STAT------------------------------
@@ -216,7 +240,7 @@ public:
 	//------------------------------RM------------------------------
     void rm(std::string path){
 		std::string rutaActiva = pwd();
-		if (rutaActiva.find(path) != 0) {	//EXCEPCIÓN se intenta borrar un directorio de la rutaActiva
+		if (rutaActiva.find(path) == 0) {	//EXCEPCIÓN se intenta borrar un directorio de la rutaActiva
     		throw borradoDentro();
 		}
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "nodo.h"
+#include <iomanip>
 
 class Directorio : public Nodo{
 protected:
@@ -9,16 +10,21 @@ public:
 
     //Guarda elementos en la lista
     //No lo guarda si ya hay un elemento con el nombre --> EXCEPCIÓN en el shell
-    void guardar(std::shared_ptr<Nodo> e, int t){
-        tamagno += t;
+    void guardar(std::shared_ptr<Nodo> e){
         elementos.push_back(e);
     }
 
     void eliminar(std::shared_ptr<Nodo> e){
-        tamagno -= e->tamagnoNodo();
         elementos.remove(e);
     }
 
+    int tamagnoNodo() const override {
+        int tam = 0;
+        for(auto i : elementos){
+            tam += i->tamagnoNodo();
+        }
+        return tam;
+    }
     void cambiarTam(int anterior, int nuevo){
         tamagno -= anterior;
         tamagno += nuevo;
@@ -32,22 +38,29 @@ public:
         std::string cont = "";
         for(auto const& i : elementos){
             cont = cont + i->name() + "\n";
-            /*if(&i != &elementos.back()){
-                cont = cont + "\n";
-            }*/
         }
 		return cont;
     }
 
-    std::string contyTamagno(){
+    /*std::string contyTamagno(){
 		std::string cont = "";
+        cont << std::setw(7) << "tamaño" << std::setw(10) + "nombre\n";
         for(auto i : elementos){
-            cont += std::to_string(tamagno) + " " + i->name();
+            cont += std::to_string(i->tamagnoNodo()) + " " + i->name();
             if(&i != &elementos.back()){
                 cont += "\n";
             }
         }
 		return cont;
+    }*/
+
+    std::string contyTamagno() {
+        std::stringstream cont;
+        cont << std::setw(7) << "tamaño" << std::setw(10) << "nombre\n"; // Establecer el ancho de campo para los encabezados
+        for (auto i : elementos) {
+            cont << std::setw(7) << i->tamagnoNodo() << std::setw(7) << i->name() << "\n"; // Establecer el ancho de campo para los datos
+        }
+        return cont.str();
     }
 
     bool existe(const std::string& f, std::shared_ptr<Nodo>& tipo){
