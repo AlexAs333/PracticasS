@@ -1,3 +1,7 @@
+/************************************************
+* Autores:  Alex Asensio Boj 874252
+*           Pablo Báscones Gállego 874802
+************************************************/
 #pragma once
 #include "nodo.h"
 #include <iomanip>
@@ -41,18 +45,6 @@ public:
         }
 		return cont;
     }
-
-    /*std::string contyTamagno(){
-		std::string cont = "";
-        cont << std::setw(7) << "tamaño" << std::setw(10) + "nombre\n";
-        for(auto i : elementos){
-            cont += std::to_string(i->tamagnoNodo()) + " " + i->name();
-            if(&i != &elementos.back()){
-                cont += "\n";
-            }
-        }
-		return cont;
-    }*/
 
     std::string contyTamagno() {
         std::stringstream cont;

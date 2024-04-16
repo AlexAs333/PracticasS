@@ -1,3 +1,7 @@
+/************************************************
+* Autores:  Alex Asensio Boj 874252
+*           Pablo Báscones Gállego 874802
+************************************************/
 #pragma once
 #include <list>
 #include <string>

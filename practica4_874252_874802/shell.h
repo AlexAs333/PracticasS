@@ -1,3 +1,7 @@
+/************************************************
+* Autores:  Alex Asensio Boj 874252
+*           Pablo Báscones Gállego 874802
+************************************************/
 #pragma once
 #include "directorio.h"
 #include "fichero.h"
@@ -56,7 +60,7 @@ public:
         //excepciones
 		if ((int)name.find("/") != -1 ||  		//EXCEPCIÓN el nombre contiene una barra diagonal
     		name == "." || name == ".." || 		//o si el nombre es . o ..
-    		(int)name.find(" ") != -1) {		//o si el último carácter es un punto
+    		(int)name.find(" ") != -1) {		//o si contiene espacios
     			throw nom();
 		}
 		if (size < 0) { //EXCEPCIÓN el tamaño es menor o igual a cero
@@ -74,15 +78,22 @@ public:
 			if(std::dynamic_pointer_cast<Enlace> (tipo) != nullptr){	//Es un enlace
 				std::shared_ptr<Enlace> link = std::dynamic_pointer_cast<Enlace> (tipo);	//Puntero para poder acceder a los métodos de enlace (Plink)
 				if(std::dynamic_pointer_cast<Fichero> (link->Plink()) != nullptr){	//Si es un fichero
-					//Cambiar tam Fichero y Directorio
-					std::shared_ptr<Fichero> fichero = std::dynamic_pointer_cast<Fichero> (tipo); 	//Puntero para poder acceder a los métodos de fichero
-					fichero->cambiarTam(size);
+					link->cambiarTam(size);
 				}
 				else if(std::dynamic_pointer_cast<Directorio> (link->Plink()) != nullptr){//EXCEPCIÓN se intenta modificar con vi un el enlace a un directorio
 					throw viDir();
 				}
 				else if(std::dynamic_pointer_cast<Enlace> (link->Plink()) != nullptr){//Vuelve a ser un enlace
-					//Recursiva
+					while(std::dynamic_pointer_cast<Enlace> (tipo) != nullptr){//Obtenemos el archivo primigenio para saber su tipo
+						std::cout << tipo->name() << std::endl;
+						tipo = link->Plink(); 
+					}
+					if(dynamic_pointer_cast<Fichero> (tipo) != nullptr){
+						link->cambiarTam(size);
+					}
+					else{	//Es un directorio
+						throw viDir();	//EXCEPCIÓN se intenta modificar con vi un el enlace a un directorio
+					}
 				}
 			}
 			else if(std::dynamic_pointer_cast<Fichero> (tipo) != nullptr){	//Es un fichero
@@ -99,8 +110,13 @@ public:
 
 	//------------------------------MKDIR------------------------------
     void mkdir(std::string name){
-        std::shared_ptr<Directorio> directorio = std::make_shared<Directorio>(name);
-		ruta.back()->guardar(directorio);
+		if(!ruta.back()->existe(name)){
+			std::shared_ptr<Directorio> directorio = std::make_shared<Directorio>(name);
+			ruta.back()->guardar(directorio);
+		}
+		else{
+			throw igualNombre();	//EXCEPCIÓN se intentacrear un directorio con nombre igual a uno
+		}        
     }
 
 	//------------------------------CD------------------------------
@@ -135,7 +151,11 @@ public:
 				}
 			}
 			else if(path [0] == '/'){
-				cd("/");
+				std :: shared_ptr<Directorio> root = ruta.front(); //Cogemos la raíz solo 
+				ruta.clear(); //Quitamos lo demás
+				ruta.push_back(root); //Metemos únicamente la raíz calculada antes
+				path = path.substr(1);
+				cd(path);
 			}
 			else{
 				std::shared_ptr<Nodo> aux;
@@ -161,7 +181,7 @@ public:
 						throw noDir();
 					}
 					ruta.push_back(aux2);
-					path.erase(0, aparicionpri);
+					path = path.substr(aparicionpri+1);
 					cd(path);
 				}
 			}
@@ -193,7 +213,12 @@ public:
 			throw igualNombre();
 		}
 
-		//COMPLETAR : excepciones nombre
+		//excepciones
+		if ((int)name.find("/") != -1 ||  		//EXCEPCIÓN el nombre contiene una barra diagonal
+    		name == "." || name == ".." || 		//o si el nombre es . o ..
+    		(int)name.find(" ") != -1) {		//o si contiene espacios
+    			throw nom();
+		}
 
 		std::shared_ptr<Enlace> enlace = std::make_shared<Enlace>(name, tam, linked);	//Creamos el enlace
 		ruta.back()->guardar(enlace);	//Guardamos el enlace
@@ -262,10 +287,6 @@ public:
 					cd(rutaActiva + "/" + path);	//Vamos al directorio a borrar
 					std::shared_ptr<Nodo> directorio = ruta.back();	//obtenemos el directorio actual
 
-					//Borramos el contenido del directorio
-					/*for(auto const i : std::dynamic_pointer_cast<Directorio>(directorio)->contenido()){
-    					rm(i->name());
-					}*/
 					//Borramos el contenido del directorio
 					std::string content = std::dynamic_pointer_cast<Directorio>(directorio)->contenido();
 					std::istringstream iss(content);
