@@ -84,10 +84,11 @@ public:
 					throw viDir();
 				}
 				else if(std::dynamic_pointer_cast<Enlace> (link->Plink()) != nullptr){//Vuelve a ser un enlace
+					//INICIO FALLO
 					while(std::dynamic_pointer_cast<Enlace> (tipo) != nullptr){//Obtenemos el archivo primigenio para saber su tipo
-						std::cout << tipo->name() << std::endl;
-						tipo = link->Plink(); 
+						tipo = std::dynamic_pointer_cast<Enlace>(tipo)->Plink();
 					}
+					//FIN FALLO
 					if(dynamic_pointer_cast<Fichero> (tipo) != nullptr){
 						link->cambiarTam(size);
 					}
