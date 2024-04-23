@@ -1,0 +1,48 @@
+groupadd: el grupo «p» ya existe
+Modo de uso: useradd [opciones] USUARIO
+             useradd -D
+             useradd -D [opciones]
+
+Opciones:
+      --badnames                do not check for bad names
+  -b, --base-dir DIR_BASE       directorio base para el directorio personal
+                                de la nueva cuenta
+      --btrfs-subvolume-home    use BTRFS subvolume for home directory
+  -c, --comment COMENTARIO      campo GECOS de la nueva cuenta
+  -d, --home-dir DIR_PERSONAL   directorio personal de la nueva cuenta
+  -D, --defaults                imprime o cambia la configuración
+                                predeterminada de useradd
+  -e, --expiredate FECHA_CADUCIDAD  fecha de caducidad de la nueva cuenta
+  -f, --inactive INACTIVO       periodo de inactividad de la contraseña
+                                de la nueva cuenta
+  -g, --gid GRUPO               nombre o identificador del grupo primario de
+                                la nueva cuenta
+  -G, --groups GRUPOS           lista de grupos suplementarios de la nueva
+                                cuenta
+  -h, --help                    muestra este mensaje de ayuda y termina
+  -k, --skel DIR_SKEL           utiliza este directorio «skeleton» alternativo
+  -K, --key CLAVE=VALOR         sobrescribe los valores predeterminados de
+                                «/etc/login.defs»
+  -l, --no-log-init             no añade el usuario a las bases de datos de
+                                lastlog y faillog
+  -m, --create-home             crea el directorio personal del usuario
+  -M, --no-create-home          no crea el directorio personal del usuario
+  -N, --no-user-group           no crea un grupo con el mismo nombre que el
+                                usuario
+  -o, --non-unique              permite crear usuarios con identificadores
+                                (UID) duplicados (no únicos)
+  -p, --password CONTRASEÑA     contraseña cifrada de la nueva cuenta
+  -r, --system                  crea una cuenta del sistema
+  -R, --root CHROOT_DIR         directory to chroot into
+  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/* files
+  -s, --shell CONSOLA           consola de acceso de la nueva cuenta
+  -u, --uid UID                 identificador del usuario de la nueva cuenta
+  -U, --user-group              crea un grupo con el mismo nombre que el
+                                usuario
+  -Z, --selinux-user USUARIO_SE  utiliza el usuario indicado para el usuario
+                                 de SELinux
+
+chpasswd: (user p) pam_chauthtok() failed, error:
+Error de manipulación del testigo de autenticación
+chpasswd: (línea 1, usuario p) la contraseña no ha cambiado
+chage: el usuario «p» no existe en /etc/passwd
