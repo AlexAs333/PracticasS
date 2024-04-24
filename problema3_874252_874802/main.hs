@@ -17,9 +17,6 @@ pack (x:xs) = (x : primero) : pack resto
     where
         (primero, resto) = span (== x) xs --span -> divide las que son del resto de la lista (xs) si son iguales que x
 
---rle :: Eq a => [a] -> [(Integer, a)]
---rle = map (\l -> (toInteger (length l), head l)) . group --Para cada elemento de la lista, aplicamos . group, que enlista a los elementos iguales sucesivos
-
 rle :: Eq a => [a] -> [(Integer, a)]
 rle [] = []
 rle (x:xs) = (toInteger (length (x:|ys)), x) : rle zs
