@@ -5,13 +5,13 @@
 #----------ROBUSTEZ----------
 #Comprobar que el usuario que ejecuta tiene privilegios de administracion
 if [ "$(id -u)" -ne 0 ]; then
- 	echo "Este script necesita privilegios de administracion" 
+ 	echo "Este script necesita privilegios de administracion" >&2
 	exit 1
 fi
 
 #Comprobar número de parámetros
 if [ $# -ne 3 ]; then
-	echo "Numero incorrecto de parametros"
+	echo "Numero incorrecto de parametros" >&2
 	exit 2
 fi
 
@@ -28,8 +28,8 @@ while read -r dir; do
     scp -i "$clave" "$2" "$usr"@"$dir":/tmp &> /dev/null   #Copia del fichero de usuarios 
 
     if [ $(echo $?) -ne 0 ]; then #Comprobación de que se ha podido conectar a la máquina
-        echo "$dir no es accesible"
-        exit 3
+        echo "$dir no es accesible" >&2
+        continue
     fi
 
     ssh -i "$clave" "$usr"@"$dir" "sudo bash /tmp/practica_3.sh $1 $2"    #ejecución del script
