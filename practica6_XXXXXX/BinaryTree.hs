@@ -33,4 +33,19 @@ showTree (Nodo x left right) indent =
     indent ++ "    |- " ++ showTree right (indent ++ "        ")
 
 ---------------FUNCIONES DEL ÁRBOL BINARIO DE BÚSQUEDA (ABB)---------------
-add :: Arbol t -> Ord x -> Arbol t
+--Añade un elemento a el Arbol
+add :: (Ord a) => Arbol a -> a -> Arbol a
+add Empty x = Nodo x Empty Empty --Caso Base
+add (Nodo v izq dch) x  --Caso Recursivo
+    | x < v = Nodo v (add izq x) dch
+    | x == v = Nodo v izq (add dch x)
+    | x > v = Nodo v izq (add dch x)
+
+build :: (Ord a) => [a] -> Arbol a
+build l = build' l empty --Inmersión de recursividad
+
+build' :: (Ord a) => [a] -> Arbol a -> Arbol a
+build' [] arbol = arbol     --Caso base
+build' (x:xs) arbol = build' xs arbol'  --Caso Recursivo
+    where
+        arbol' = add arbol x
