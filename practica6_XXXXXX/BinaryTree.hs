@@ -1,3 +1,6 @@
+--Alex Asensio Boj 874252
+--Pablo Báscone Gállego 874802
+
 module BinaryTree where
 
 import Data.List
