@@ -70,14 +70,20 @@ balance arbol = buildBalanced l
     where
         l = arbolLista arbol
 
+--divideLista :: [a] -> (a, [a], [a])
+--divideLista [] = error "La lista está vacía"
+--divideLista [x] = (x, [], [])
+--divideLista xs = (mid, left, right)
+  --where
+    --mid = head (drop (length xs `div` 2) xs)
+    --left = take (length xs `div` 2) xs
+    --right = drop ((length xs `div` 2) + 1) xs
+
 divideLista :: [a] -> (a, [a], [a])
 divideLista [] = error "La lista está vacía"
-divideLista [x] = (x, [], [])
 divideLista xs = (mid, left, right)
   where
-    mid = head (drop (length xs `div` 2) xs)
-    left = take (length xs `div` 2) xs
-    right = drop ((length xs `div` 2) + 1) xs
+    (left, mid:right) = splitAt (length xs `div` 2) xs
 
 arbolLista :: Arbol a -> [a]
 arbolLista Empty = []
