@@ -1,0 +1,103 @@
+v 4
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/testbench_AOC2_SoC.vhd" "4425ec521b521d816a349e3d2a05ef27d9a35808" "20240512181732.413":
+  entity testbench at 3( 26) + 2 on 2021;
+  architecture behavior of testbench at 10( 149) + 2 on 2022;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/mux2_5bits.vhd" "380d4d9ec33f6a77c2e56b7f36dec5b19b69ff9d" "20240512181732.130":
+  entity mux2_5bits at 20( 489) + 0 on 2017;
+  architecture behavioral of mux2_5bits at 39( 1068) + 0 on 2018;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/memoriaRAM_test.bucle_2024.P2.vhd" "8e876a1eb7d0d5964891897642974be5eb251176" "20240512181731.927":
+  entity ram_128_32 at 20( 489) + 0 on 2013;
+  architecture behavioral of ram_128_32 at 44( 1363) + 0 on 2014;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/memoriaRAM_64_32_enable.vhd" "6eac88fc48db01c27a01cd07eef31b662a1f74de" "20240512181731.548":
+  entity ram_64_32 at 20( 489) + 0 on 2009;
+  architecture behavioral of ram_64_32 at 44( 1359) + 0 on 2010;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/counter.vhd" "4c787804472fe6172d2d20f4bfdcfb0934d580c9" "20240512181731.295":
+  entity counter at 20( 487) + 0 on 2005;
+  architecture behavioral of counter at 46( 1270) + 0 on 2006;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/arbitro.vhd" "0622d08d8c23520dd7c94367e7315fec51cb22b5" "20240512181730.955":
+  entity arbitro at 20( 484) + 0 on 2001;
+  architecture behavioral of arbitro at 44( 1357) + 0 on 2002;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/Via_2024.vhd" "2544af16bdb38dd02808a11276e3eee571c436fd" "20240512181730.525":
+  entity via at 1( 0) + 0 on 1997;
+  architecture behavioral of via at 25( 1297) + 0 on 1998;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/UC_Mips_2024_completar.vhd" "e8f28eab55f1c1bb2b863c44db6ac74c26eb80b2" "20240512181730.213":
+  entity uc at 6( 271) + 0 on 1993;
+  architecture behavioral of uc at 38( 1519) + 0 on 1994;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/UA_2024_completar.vhd" "e808d51d4b14a7f174e56ed47c08315b559205b4" "20240512181729.862":
+  entity ua at 6( 270) + 0 on 1989;
+  architecture behavioral of ua at 24( 877) + 0 on 1990;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/Mips_segmentado_IRQ_2024_completar.vhd" "b7bb03bf9f0328368d1afd4c723b354847fc1750" "20240512181729.326":
+  entity mips_segmentado at 14( 705) + 0 on 1985;
+  architecture behavioral of mips_segmentado at 33( 1599) + 0 on 1986;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/MD_cont_2024.vhd" "3564c53bee06fb05f8592dc2a0c6e41ce659d41d" "20240512181728.953":
+  entity md_cont at 19( 398) + 0 on 1981;
+  architecture behavioral of md_cont at 41( 1331) + 0 on 1982;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/IO_master_2024.vhd" "43a3c4b1200fc712db3fccc5b118d594c9d7b631" "20240512181728.507":
+  entity io_master at 1( 0) + 0 on 1977;
+  architecture behavioral of io_master at 24( 1244) + 0 on 1978;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/FIFO_reg.vhd" "05cf4847cc560ffcca35210b0249fba6811f815d" "20240512181728.089":
+  entity fifo_reg at 20( 481) + 0 on 1973;
+  architecture behavioral of fifo_reg at 47( 1325) + 0 on 1974;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/Exception_manager_2024_completar.vhd" "24227045b6611854561f7488f1145e42d647d189" "20240512181727.817":
+  entity exception_manager at 6( 309) + 0 on 1969;
+  architecture behavioral of exception_manager at 29( 1798) + 0 on 1970;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/Banco_MEM.vhd" "ac4b8b3ab194949e29b7e4c0d8e934e01c59c592" "20240512181727.588":
+  entity banco_mem at 20( 488) + 0 on 1965;
+  architecture behavioral of banco_mem at 71( 2678) + 0 on 1966;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/Banco_EX.vhd" "57445634bb03f893c9352a376ecd62698d63e32d" "20240512181727.314":
+  entity banco_ex at 20( 487) + 0 on 1961;
+  architecture behavioral of banco_ex at 88( 3392) + 0 on 1962;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/AOC2_SoC.vhd" "5105383ef5ea414868dc29f477eee582375260a8" "20240512181727.053":
+  entity aoc2_soc at 3( 26) + 2 on 1957;
+  architecture behavior of aoc2_soc at 17( 536) + 2 on 1958;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/ALU.vhd" "36885e9b9fb1d4260cef66f02b1eb0f5c1fecac1" "20240512181726.862":
+  entity alu at 20( 482) + 0 on 1955;
+  architecture behavioral of alu at 40( 1278) + 0 on 1956;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/BReg.vhd" "bb69d410cca56dd4f196ac706a7044ffa4091399" "20240512181727.185":
+  entity breg at 20( 481) + 0 on 1959;
+  architecture behavioral of breg at 49( 1525) + 0 on 1960;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/Banco_ID.vhd" "688b006032428225982a73c4921ea61c8c20d37f" "20240512181727.491":
+  entity banco_id at 4( 288) + 0 on 1963;
+  architecture behavioral of banco_id at 24( 1122) + 0 on 1964;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/Banco_WB.vhd" "09f709cc072c7c47cd795b43ce7f357e3da439d1" "20240512181727.694":
+  entity banco_wb at 20( 487) + 0 on 1967;
+  architecture behavioral of banco_wb at 63( 2304) + 0 on 1968;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/Ext_signo.vhd" "a86099b57bba8e351753e752f26601c7908ad4f4" "20240512181728.030":
+  entity ext_signo at 20( 488) + 0 on 1971;
+  architecture behavioral of ext_signo at 37( 989) + 0 on 1972;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/IO_MD_subsystem_P2_24.vhd" "1dcde2d2342a73856e8f2d3ef5c546c18617ab29" "20240512181728.246":
+  entity io_data_memory_subsystem at 20( 470) + 0 on 1975;
+  architecture behavioral of io_data_memory_subsystem at 57( 2454) + 0 on 1976;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/MC_datos_2024.vhd" "2e5fd21f983b0a45b75870eec6bc442a1a993244" "20240512181728.631":
+  entity mc_datos at 20( 634) + 0 on 1979;
+  architecture behavioral of mc_datos at 58( 2512) + 0 on 1980;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/MD_scratch_2024.vhd" "5605d0c4696bd54dac4b2885018edf36352d4b1a" "20240512181729.118":
+  entity md_scratch at 19( 398) + 0 on 1983;
+  architecture behavioral of md_scratch at 40( 1248) + 0 on 1984;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/REGISTER.vhd" "bb1f16639744f39ecc1ef4892185e16345358757" "20240512181729.711":
+  entity reg at 2( 2) + 0 on 1987;
+  architecture behavioral of reg at 15( 421) + 0 on 1988;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/UC_MC_2024_completar.vhd" "0f7869261dfa5f0051b7ec8f1c4d9b49381521f2" "20240512181730.025":
+  entity uc_mc at 20( 600) + 0 on 1991;
+  architecture behavioral of uc_mc at 80( 4616) + 0 on 1992;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/UD_2024_completar.vhd" "43ad39431f801bd2563280bdc27c5ff4f457ca69" "20240512181730.401":
+  entity ud at 6( 299) + 0 on 1995;
+  architecture behavioral of ud at 32( 1998) + 0 on 1996;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/adder32.vhd" "314628325a7fba8ded83ce676b48051d32b99dc4" "20240512181730.769":
+  entity adder32 at 20( 486) + 0 on 1999;
+  architecture behavioral of adder32 at 39( 1097) + 0 on 2000;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/bits_shifter.vhd" "84314704fb90b0c3a56bacef575e87f50f736186" "20240512181731.082":
+  entity two_bits_shifter at 20( 491) + 0 on 2003;
+  architecture behavioral of two_bits_shifter at 37( 1003) + 0 on 2004;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/counter_2bits.vhd" "0fc3f2cb6ca5db5c10947b0ce45d20cff2218e2e" "20240512181731.436":
+  entity counter_2bits at 20( 486) + 0 on 2007;
+  architecture behavioral of counter_2bits at 34( 950) + 0 on 2008;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/memoriaRAM_I_test.bucle_lectura_2024.P2.vhd" "67e97798c06d383ca64a9a1dff01d7f71fd3024d" "20240512181731.733":
+  entity memoriaram_i at 20( 491) + 0 on 2011;
+  architecture behavioral of memoriaram_i at 41( 1237) + 0 on 2012;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/mux2_1.vhd" "16c03f03addbb8a3f3dad9a1da21f497d0aa4854" "20240512181732.012":
+  entity mux2_1 at 20( 493) + 0 on 2015;
+  architecture behavioral of mux2_1 at 39( 1069) + 0 on 2016;
+file "/mnt/c/Users/alexa/Desktop/Moodle.P2.2024/" "fuentesMoodle/mux4_1.vhd" "77e61d225e8903760cce4b3e7e6390eff88901d5" "20240512181732.208":
+  entity mux4_1 at 20( 493) + 0 on 2019;
+  architecture behavioral of mux4_1 at 41( 1197) + 0 on 2020;
