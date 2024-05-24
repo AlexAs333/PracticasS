@@ -54,7 +54,7 @@ entity UC_MC is
 			-- se�ales para los contadores de rendimiento de la MC
 			inc_m : out STD_LOGIC; -- indica que ha habido un fallo en MC
 			inc_w : out STD_LOGIC; -- indica que ha habido una escritura en MC
-			inc_r : out STD_LOGIC; -- indica que ha habido una escritura en MC
+			inc_r : out STD_LOGIC; -- indica que ha habido una lectura en MC
 			inc_cb :out STD_LOGIC; -- indica que ha habido un reemplazo sucio en MC
 			-- Gesti�n de errores
 			unaligned: in STD_LOGIC; --indica que la direcci�n solicitada por el MIPS no est� alineada
@@ -211,13 +211,53 @@ Mem_ERROR <= '1' when (error_state = memory_error) else '0';
 
 	elsif (state = Inicio and hit = '0') then --Piden leer y es fallo
 		next_state <= pedir_bus
-		bus_req = '1'
-	elsif (state = pedir_bus and bus_grant = '0') then
+		bus_req <= '1'
+	elsif (state = pedir_bus and bus_grant = '0') then --Bud sin recibir
 		next_state <= pedir_bus
-		bus_req = '1'
-	elsif (state = pedir_bus and bus_grant = '1') then
-		next_state <= 
-		
+		bus_req <= '1'
+	elsif (state = pedir_bus and bus_grant = '1') then --Bus recibido
+		next_state <= bus_dado 
+		bus_req <= '1'
+		frame <= '1' 		--HASTA AQUÍ ESTÁ BIEN
+	elsif (state = bus_dado and Bus_DevSel = '0') then --Dirección fuera de rango
+		next_state <= Inicio
+		frame <= '0'
+		next_error_state <= memory_error
+		load_addr_error <= '1'; --INCLUSO PUEDE QUE HASTA AQUÍ
+	--SUCIO--
+	elsif (state = bus_dado and dirty_bit = '1') then --Reemplazo en sucio
+		next_state <= Sucio
+		frame <= '1'
+		internal_addr <= '1'
+		--???
+	elsif (state = Sucio and bus_TRDY = '0' ) then --Esperando a que pueda hacerse la instrucción
+		next_state <= Sucio
+		frame <= '1'
+	elsif (state = Sucio and bus_TRDY = '1' and last_word_block = '1' ) then --Esperando a que pueda hacerse la instrucción
+		next_state <= Limpio
+		Update_dirty <= '1'
+		Block_copied_back <= '1'
+		frame <= '1'
+		inc_cb <= '1'
+	--LIMPIO--
+	elsif(state = bus_dado and dirty_bit = '0') --Escritura en limpio/Lectura
+		next_state <= Limpio
+		frame <= '1'
+		internal_addr <= '1'
+	elsif (state = Limpio and bus_TRDY = '0' ) then --Esperando a que pueda hacerse la instrucción
+		next_state <= Limpio
+		frame <= '1'
+	elsif(state = Limpio and bus_TRDY = '1' and last_word_block = '1') --Se ha terminado de leer
+		next_state <= Inicio
+		last_word <= '1'
+		ready <= '0'
+		frame <= '0'
+		MC_tags_WE <= '1'
+		--Cosas del inicio yo que sei
+	--NON-CACHEABLE---
+	elsif(state = bus_dado and addr_non_cacheable = '1')--leer/escribir scratch
+		next_state <= Non_Cach
+		frame = '1'
 	--Completar. �Qu� m�s hay que hacer en INICIO?. 
 	--Completar. �Qu� m�s estados ten�is?. 
 ------------------------------------------------------------------------------------------------------------------------
